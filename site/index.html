@@ -68,6 +68,7 @@
       .btn.ox{background:linear-gradient(180deg,rgba(255,255,255,.16),rgba(255,255,255,0) 52%),linear-gradient(160deg,#AD2830,#7B151A 55%,#5A0D11);box-shadow:0 14px 34px -14px rgba(156,36,42,.8)}
       .btn.bone{background:var(--ink);color:#0B0807;border-color:transparent}
       .btn.line{background:transparent;border-color:var(--line2)}
+      .video{display:none;margin-top:14px}
       .facts{display:flex;gap:36px;margin-top:40px;flex-wrap:wrap}
       .facts div{display:flex;flex-direction:column}
       .facts b{font:200 44px/1 'Martian Mono',monospace;font-stretch:87.5%;letter-spacing:-.04em}
@@ -142,6 +143,7 @@
               <a class="btn bone" href="admin/">Open het paneel</a>
               <a class="btn line" href="website/">Open de website</a>
             </div>
+            <div class="video" id="video"><a class="btn line" href="hulp/">Bekijk de uitlegvideo</a></div>
             <div class="facts">
               <div><b>5</b><span>om over te praten</span></div>
               <div><b>15</b><span>voor elke avond</span></div>
@@ -255,7 +257,13 @@
         url.searchParams.set('lang', menu.value);
         location.replace(url.toString());
       });
-      for (const a of document.querySelectorAll('a[href^="app/"], a[href^="admin/"], a[href^="website/"]')) a.setAttribute('href', withLang(a.getAttribute('href')));
+      for (const a of document.querySelectorAll('a[href^="app/"], a[href^="admin/"], a[href^="website/"], a[href^="hulp/"]')) a.setAttribute('href', withLang(a.getAttribute('href')));
+      // The explainer video shows up once it has been made.
+      fetch('hulp/', { method: 'HEAD' })
+        .then((r) => {
+          if (r.ok) document.getElementById('video').style.display = 'block';
+        })
+        .catch(() => {});
       const appFrame = document.getElementById('app-frame');
       appFrame.src = withLang('app/');
       document.getElementById('admin-frame').src = withLang('admin/');
