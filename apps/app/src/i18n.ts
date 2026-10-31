@@ -1,4 +1,4 @@
-import { getLocale, isRTL, missing, pickLocale, rememberLocale, setLocale, tr, trackMissing, type Locale } from '@ninja/shared';
+import { getLocale, htmlLang, isRTL, missing, pickLocale, rememberLocale, setLocale, tr, trackMissing, type Locale } from '@ninja/shared';
 import { Platform } from 'react-native';
 import type { ReactNode } from 'react';
 
@@ -9,7 +9,7 @@ export function installLocale() {
   const locale = pickLocale();
   setLocale(locale);
   if (Platform.OS === 'web' && typeof document !== 'undefined') {
-    document.documentElement.lang = locale;
+    document.documentElement.lang = htmlLang(locale);
     document.documentElement.dir = isRTL(locale) ? 'rtl' : 'ltr';
     // ?i18n-check collects the Dutch that is shown without a translation (window.__ninjaMissing), to find gaps.
     if (new URLSearchParams(window.location.search).has('i18n-check')) {

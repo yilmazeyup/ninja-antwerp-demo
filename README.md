@@ -69,10 +69,13 @@ after descriptions, not a survey). Ninja's owners and crew are not named anywher
 
 ## Languages
 
-Dutch (as spoken in Antwerp) is the default. The app, the panel, the website and the start page also come in English,
-Türkçe, العربية (right to left), Français, Deutsch and Italiano: Clan → Instellingen in the app, the select in the
-panel, on the website and the start page, or `?lang=en|tr|ar|fr|de|it`. The code writes Dutch; the dictionaries in
-`packages/shared/src/i18n/` map it to each language. After changing text, run `node scripts/i18n-extract.mjs`.
+Ninja is in Antwerp, in Flanders, where the language is Dutch as Belgians speak it (Flemish). That is the default,
+written with Belgian words (frieten, reservatie, goesting, merci), and the pages say `nl-BE`. French, Belgium's other
+main language, is one tap away, with English, Türkçe, العربية (right to left), Deutsch and Italiano: Clan →
+Instellingen in the app, the select in the panel, on the website and the start page, or `?lang=fr|en|tr|ar|de|it`. The
+choice is remembered on the device. The code writes the Flemish Dutch; the dictionaries in `packages/shared/src/i18n/`
+map it to each language. After changing text, run `node scripts/i18n-extract.mjs`, then `node scripts/i18n-split.mjs
+<lang>` and `node scripts/i18n-merge.mjs <lang>` for the parts that were translated.
 
 ## Structure
 

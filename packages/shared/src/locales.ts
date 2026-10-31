@@ -1,4 +1,5 @@
-// The demo's seven languages. Dutch (as spoken in Antwerp) is the default; the others are a choice per device.
+// The demo's seven languages. Belgian Dutch (Flemish, the language of Antwerp) is the default; French, Belgium's other
+// main language, and the rest are a choice per device.
 
 export const LOCALES = ['nl', 'en', 'tr', 'ar', 'fr', 'de', 'it'] as const;
 
@@ -8,7 +9,7 @@ export const DEFAULT_LOCALE: Locale = 'nl';
 
 /** Each language in its own script, so people can find theirs. */
 export const LOCALE_NAMES: Record<Locale, string> = {
-  nl: 'Nederlands',
+  nl: 'Nederlands (België)',
   en: 'English',
   tr: 'Türkçe',
   ar: 'العربية',
@@ -18,6 +19,9 @@ export const LOCALE_NAMES: Record<Locale, string> = {
 };
 
 export const isRTL = (locale: Locale) => locale === 'ar';
+
+/** The page language for screen readers, spelling and hyphenation: Belgian Dutch and Belgian French. */
+export const htmlLang = (locale: Locale) => (locale === 'nl' ? 'nl-BE' : locale === 'fr' ? 'fr-BE' : locale);
 
 /** Maps a code such as "tr" or "ar-MA" to a supported language, or null. */
 export function matchLocale(code?: string | null): Locale | null {

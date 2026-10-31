@@ -71,7 +71,9 @@ Note: in r186 `PostProcessing` is called `RenderPipeline`, and `PCFSoftShadowMap
 
 ## Words
 
-Dutch as spoken in Antwerp is the source language: *reservatie*, *frieten*, *goesting*, *merci*, *smakelijk*. Short,
+Belgian Dutch (Flemish), the language of Antwerp, is the source language: *reservatie*, *frieten*, *goesting*, *merci*,
+*smakelijk*; never Netherlands-only words (patat, pinnen, reservering). French is Belgium's other main language and comes
+second. Short,
 confident, a little dry. Dish names stay as Ninja writes them (Ninja Kebab, Iskender, Beef Tallow Fries); descriptions
 are in Dutch. The code writes the Dutch exactly as shown; `tr()` and the JSX wrappers look up the other six languages
 (en, tr, ar, fr, de, it) in `packages/shared/src/i18n/*.json`. Write whole sentences with `{placeholders}`

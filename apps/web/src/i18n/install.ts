@@ -1,10 +1,10 @@
-import { ARABIC_FONTS, isRTL, missing, pickLocale, rememberLocale, setLocale, trackMissing, type Locale } from '@ninja/shared';
+import { ARABIC_FONTS, htmlLang, isRTL, missing, pickLocale, rememberLocale, setLocale, trackMissing, type Locale } from '@ninja/shared';
 
 // Imported first by each page's entry: the language is set before any module or screen shows text.
 
 const locale = pickLocale();
 setLocale(locale);
-document.documentElement.lang = locale;
+document.documentElement.lang = htmlLang(locale);
 document.documentElement.dir = isRTL(locale) ? 'rtl' : 'ltr';
 
 if (isRTL(locale)) {

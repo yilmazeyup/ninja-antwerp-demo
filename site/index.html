@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="nl">
+<html lang="nl-BE">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -20,7 +20,7 @@
           localStorage.setItem('ninja-lang', lang);
         } catch (e) {}
         var root = document.documentElement;
-        root.lang = lang;
+        root.lang = lang === 'nl' ? 'nl-BE' : lang === 'fr' ? 'fr-BE' : lang;
         root.dir = lang === 'ar' ? 'rtl' : 'ltr';
         if (lang !== 'nl') root.className += ' i18n-wait';
         window.LANG = lang;
@@ -123,7 +123,7 @@
       <header>
         <a class="brand" href="./" translate="no" aria-label="Ninja"><img src="brand/logo.png" alt="Ninja" /></a>
         <select id="lang" aria-label="Taal" translate="no">
-          <option value="nl">Nederlands</option>
+          <option value="nl">Nederlands (België)</option>
           <option value="en">English</option>
           <option value="tr">Türkçe</option>
           <option value="ar">العربية</option>
