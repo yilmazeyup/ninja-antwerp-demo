@@ -11,7 +11,7 @@
       // The language: ?lang= first, then the last choice on this device (the app, the panel and the website read the
       // same), else Dutch. Set before the frames load.
       (function () {
-        var all = ['nl', 'en', 'tr', 'ar', 'fr', 'de', 'it'];
+        var all = ['nl', 'fr', 'en', 'tr', 'ar', 'de', 'it', 'nl-NL'];
         var lang = 'nl';
         try {
           var asked = new URLSearchParams(location.search).get('lang');
@@ -123,13 +123,14 @@
       <header>
         <a class="brand" href="./" translate="no" aria-label="Ninja"><img src="brand/logo.png" alt="Ninja" /></a>
         <select id="lang" aria-label="Taal" translate="no">
-          <option value="nl">Nederlands (België)</option>
+          <option value="nl">Vlaams</option>
+          <option value="fr">Français</option>
           <option value="en">English</option>
           <option value="tr">Türkçe</option>
           <option value="ar">العربية</option>
-          <option value="fr">Français</option>
           <option value="de">Deutsch</option>
           <option value="it">Italiano</option>
+          <option value="nl-NL">Nederlands (Nederland)</option>
         </select>
       </header>
       <main>

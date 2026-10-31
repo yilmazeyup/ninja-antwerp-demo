@@ -11,8 +11,8 @@ Live: https://yilmazeyup.github.io/ninja-antwerp-demo/
 - Guest app: `/app/`
 - Management panel: `/admin/` (`?at=2026-10-31T19:30` sets Ninja's clock to a busy Saturday evening)
 - Website: `/website/`
-- Explainer video: `/hulp/` (2:44, narrated in Flemish by the voice Ellen, fourteen chapters, subtitles in all seven
-  languages)
+- Explainer video: `/hulp/` (2:44, narrated in Flemish by the voice Ellen, fourteen chapters, subtitles in every
+  language of the demo)
 
 The look and the rules behind everything are in [DESIGN.md](DESIGN.md).
 
@@ -73,13 +73,15 @@ after descriptions, not a survey). Ninja's owners and crew are not named anywher
 
 ## Languages
 
-Ninja is in Antwerp, in Flanders, where the language is Dutch as Belgians speak it (Flemish). That is the default,
-written with Belgian words (frieten, reservatie, goesting, merci), and the pages say `nl-BE`. French, Belgium's other
-main language, is one tap away, with English, Türkçe, العربية (right to left), Deutsch and Italiano: Clan →
-Instellingen in the app, the select in the panel, on the website and the start page, or `?lang=fr|en|tr|ar|de|it`. The
-choice is remembered on the device. The code writes the Flemish Dutch; the dictionaries in `packages/shared/src/i18n/`
-map it to each language. After changing text, run `node scripts/i18n-extract.mjs`, then `node scripts/i18n-split.mjs
-<lang>` and `node scripts/i18n-merge.mjs <lang>` for the parts that were translated.
+Ninja is in Antwerp, in Flanders, so the main language is Flemish (Vlaams), written with Belgian words (frieten,
+reservatie, goesting, merci) and declared as `nl-BE`. It is the default and the language the code is written in.
+French, Belgium's other main language, comes next, then English, Türkçe, العربية (right to left), Deutsch, Italiano,
+and Nederlands (Nederland): Dutch as spoken in the Netherlands is one option among the others, with the handful of words
+that differ there (friet, reservering, zin, bedankt, bar, aansluiten). Pick one under Clan → Instellingen in the app, in
+the select of the panel, the website, the start page and the video page, or with `?lang=fr|en|tr|ar|de|it|nl-NL`; the
+choice is remembered on the device. The dictionaries are in `packages/shared/src/i18n/`. After changing text, run
+`node scripts/i18n-extract.mjs`, `node scripts/i18n-netherlands.mjs` (rewrites `nl-NL.json` from the Flemish), and
+`node scripts/i18n-split.mjs <lang>` / `node scripts/i18n-merge.mjs <lang>` for the other languages.
 
 ## Structure
 

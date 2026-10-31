@@ -7,7 +7,15 @@ type Names = { wdShort: string[]; wdLong: string[]; monShort: string[]; monLong:
 const AR_DAYS = ['الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
 const AR_MONTHS = ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'];
 
+const DUTCH: Names = {
+  wdShort: ['zo', 'ma', 'di', 'wo', 'do', 'vr', 'za'],
+  wdLong: ['zondag', 'maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag'],
+  monShort: ['jan', 'feb', 'mrt', 'apr', 'mei', 'jun', 'jul', 'aug', 'sep', 'okt', 'nov', 'dec'],
+  monLong: ['januari', 'februari', 'maart', 'april', 'mei', 'juni', 'juli', 'augustus', 'september', 'oktober', 'november', 'december'],
+};
+
 const NAMES: Record<Locale, Names> = {
+  'nl-NL': DUTCH,
   nl: {
     wdShort: ['zo', 'ma', 'di', 'wo', 'do', 'vr', 'za'],
     wdLong: ['zondag', 'maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag'],

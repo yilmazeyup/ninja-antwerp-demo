@@ -4,6 +4,7 @@ import DE from './de.json';
 import EN from './en.json';
 import FR from './fr.json';
 import IT from './it.json';
+import NLNL from './nl-NL.json';
 import TR from './tr.json';
 
 /*
@@ -15,7 +16,7 @@ import TR from './tr.json';
 
 type Dict = Record<string, string>;
 
-const DICTS: Record<Exclude<Locale, 'nl'>, Dict> = { en: EN, tr: TR, ar: AR, fr: FR, de: DE, it: IT };
+const DICTS: Record<Exclude<Locale, 'nl'>, Dict> = { en: EN, tr: TR, ar: AR, fr: FR, de: DE, it: IT, 'nl-NL': NLNL };
 
 // The language lives on the page, not in this module: a bundler may load the module twice (Vite pre-bundles the
 // panel's JSX wrapper in development), and both copies must show the same language.

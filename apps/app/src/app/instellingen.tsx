@@ -1,4 +1,4 @@
-import { getLocale, LOCALE_NAMES, LOCALES, resetBridge, type Locale } from '@ninja/shared';
+import { getLocale, LOCALE_NAMES, LOCALE_TAGS, LOCALES, resetBridge, type Locale } from '@ninja/shared';
 import { router } from 'expo-router';
 import { useState } from 'react';
 import { View } from 'react-native';
@@ -51,7 +51,7 @@ export default function Instellingen() {
                     {LOCALE_NAMES[l]}
                   </Txt>
                   <Txt v="num" size={10} color={C.faint} raw>
-                    {l.toUpperCase()}
+                    {LOCALE_TAGS[l]}
                   </Txt>
                   <View style={{ width: 22, height: 22, borderRadius: 11, borderWidth: 1, borderColor: on ? C.amber : C.line2, alignItems: 'center', justifyContent: 'center' }}>
                     {on ? <View style={{ width: 10, height: 10, borderRadius: 5, backgroundColor: C.amber }} /> : null}
