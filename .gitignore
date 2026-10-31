@@ -1,0 +1,18 @@
+node_modules/
+.expo/
+dist/
+_site/
+web-build/
+*.tsbuildinfo
+.DS_Store
+.env*.local
+.env
+ios/
+android/
+
+# Drop folder for raw clips and stills before they are processed into the app
+media/
+
+# Local tool settings
+.claude/
+_i18n/

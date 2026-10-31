@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- A demo with fictional guests: keep it out of search results. -->
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#0B0807" />
+    <title>Ninja Antwerp · demo</title>
+    <script>
+      // The language: ?lang= first, then the last choice on this device (the app, the panel and the website read the
+      // same), else Dutch. Set before the frames load.
+      (function () {
+        var all = ['nl', 'en', 'tr', 'ar', 'fr', 'de', 'it'];
+        var lang = 'nl';
+        try {
+          var asked = new URLSearchParams(location.search).get('lang');
+          var saved = localStorage.getItem('ninja-lang');
+          lang = all.indexOf(asked) >= 0 ? asked : all.indexOf(saved) >= 0 ? saved : 'nl';
+          localStorage.setItem('ninja-lang', lang);
+        } catch (e) {}
+        var root = document.documentElement;
+        root.lang = lang;
+        root.dir = lang === 'ar' ? 'rtl' : 'ltr';
+        if (lang !== 'nl') root.className += ' i18n-wait';
+        window.LANG = lang;
+      })();
+    </script>
+    <meta name="description" content="Een eigen app, een beheerpaneel in 3D en een nieuwe website voor Ninja aan de Vlaamsekaai in Antwerpen. Demo met fictieve gasten." />
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Martian+Mono:wdth,wght@75..112.5,100..800&family=Cormorant+Garamond:ital,wght@1,400;1,500;1,600&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap"
+    />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@800&text=%E5%BF%8D%E5%BD%B1%E4%B8%8A%E4%B8%AD%E4%B8%8B&display=swap" />
+    <style>
+      :root{--bg:#0B0807;--bg2:#110C0A;--panel:#18100D;--panel2:#22150F;--ink:#F4ECE1;--soft:#CDBFAF;--muted:#8F8174;--faint:#5C5047;--line:rgba(244,236,225,.09);--line2:rgba(244,236,225,.17);--stitch:rgba(244,236,225,.26);--ox:#7B151A;--ox2:#9C242A;--ember:#FF6A2A;--amber:#FFB547;--flame:#FFE6A8;--trav:#E7DCCB;--chrome:#C9CDD3}
+      *{box-sizing:border-box}
+      html,body{margin:0;background:var(--bg);color:var(--ink)}
+      body{font:16px/1.6 Archivo,'IBM Plex Sans Arabic',system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+      .i18n-wait body{opacity:0}
+      a{color:inherit}
+      ::selection{background:var(--ox2);color:var(--ink)}
+      .wrap{max-width:1280px;margin:0 auto;padding:0 28px}
+      .glow{position:fixed;inset:auto -20vw -40vh -20vw;height:80vh;pointer-events:none;z-index:0;background:radial-gradient(closest-side,rgba(255,106,42,.13),transparent) 20% 60%/55% 80% no-repeat,radial-gradient(closest-side,rgba(156,36,42,.2),transparent) 80% 50%/60% 90% no-repeat;filter:blur(10px);animation:drift 28s ease-in-out infinite alternate}
+      @keyframes drift{to{transform:translate3d(6vw,-4vh,0) scale(1.08)}}
+      .grain{position:fixed;inset:0;pointer-events:none;z-index:2;opacity:.05;mix-blend-mode:overlay;background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+      main,header,footer{position:relative;z-index:1}
+      header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:22px 0}
+      .brand img{height:44px;display:block}
+      select{appearance:none;height:40px;padding:0 18px;border-radius:999px;border:1px solid var(--line2);background:var(--panel);color:var(--ink);font:700 11px Archivo,sans-serif;font-stretch:125%;letter-spacing:.16em;text-transform:uppercase;cursor:pointer}
+      select option{color:#0B0807}
+      .label{display:inline-flex;align-items:center;gap:12px;font:750 10.5px/1.3 Archivo,sans-serif;font-stretch:125%;letter-spacing:.22em;text-transform:uppercase;color:var(--amber)}
+      .label::before{content:'';width:22px;height:1px;background:linear-gradient(90deg,transparent,var(--chrome))}
+      h1,h2,h3{margin:0;font-family:Archivo,'IBM Plex Sans Arabic',sans-serif}
+      h1{font-weight:800;font-stretch:112.5%;font-size:clamp(52px,7.4vw,112px);line-height:.92;letter-spacing:-.02em;text-transform:uppercase}
+      h2{font-weight:750;font-stretch:112.5%;font-size:clamp(34px,4.6vw,66px);line-height:.98;letter-spacing:-.015em;text-transform:uppercase}
+      [dir='rtl'] h1,[dir='rtl'] h2{letter-spacing:0;line-height:1.15;text-transform:none}
+      .fire{background:linear-gradient(100deg,#FFE6A8,#FFB547 30%,#FF6A2A 65%,#C73A16);-webkit-background-clip:text;background-clip:text;color:transparent}
+      .serif{font:italic 500 clamp(20px,1.9vw,26px)/1.38 'Cormorant Garamond',Georgia,serif;color:var(--soft)}
+      .mono{font-family:'Martian Mono',ui-monospace,monospace;font-stretch:87.5%;font-variant-numeric:tabular-nums}
+      .hero{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center;padding:36px 0 80px}
+      .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}
+      .btn{height:54px;padding:0 26px;border-radius:999px;display:inline-flex;align-items:center;gap:10px;font:750 11.5px Archivo,sans-serif;font-stretch:125%;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;border:1px solid rgba(244,236,225,.34);cursor:pointer;color:var(--ink);transition:transform .3s ease,filter .3s}
+      .btn:hover{transform:translateY(-2px);filter:brightness(1.1)}
+      .btn.ox{background:linear-gradient(180deg,rgba(255,255,255,.16),rgba(255,255,255,0) 52%),linear-gradient(160deg,#AD2830,#7B151A 55%,#5A0D11);box-shadow:0 14px 34px -14px rgba(156,36,42,.8)}
+      .btn.bone{background:var(--ink);color:#0B0807;border-color:transparent}
+      .btn.line{background:transparent;border-color:var(--line2)}
+      .facts{display:flex;gap:36px;margin-top:40px;flex-wrap:wrap}
+      .facts div{display:flex;flex-direction:column}
+      .facts b{font:200 44px/1 'Martian Mono',monospace;font-stretch:87.5%;letter-spacing:-.04em}
+      .facts span{font:750 9.5px Archivo,sans-serif;font-stretch:125%;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:10px}
+      .phone{position:relative;width:min(390px,100%);aspect-ratio:390/820;margin:0 auto;border-radius:58px;padding:11px;background:linear-gradient(160deg,#2a2a2e,#0c0c0e 40%,#1d1d21);box-shadow:0 60px 120px -40px rgba(0,0,0,.9),0 0 0 1px rgba(201,205,211,.25),0 0 120px -30px rgba(255,106,42,.35)}
+      .phone .screen{position:relative;width:100%;height:100%;border-radius:47px;overflow:hidden;background:#0B0807}
+      .phone iframe{position:absolute;left:0;top:0;width:390px;border:0;transform-origin:0 0}
+      section{padding:84px 0;border-top:1px solid var(--line)}
+      .five{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:40px}
+      .card{all:unset;box-sizing:border-box;position:relative;cursor:pointer;display:flex;flex-direction:column;gap:10px;padding:22px;border-radius:24px;background:linear-gradient(180deg,rgba(244,236,225,.04),rgba(244,236,225,0) 40%),var(--panel);border:1px solid var(--line);transition:transform .4s cubic-bezier(.2,.8,.2,1),border-color .3s}
+      .card::after{content:'';position:absolute;inset:6px;border:1px dashed var(--stitch);border-radius:19px;opacity:.45;pointer-events:none}
+      .card:hover{transform:translateY(-4px);border-color:var(--line2)}
+      .card:focus-visible{outline:1px solid var(--amber);outline-offset:3px}
+      .card.big{min-height:300px;background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,0) 45%),radial-gradient(120% 140% at 15% 0%,#8E2027,#5E1016 55%,#3A0A0D)}
+      .card .no{font:500 12px/1 'Martian Mono',monospace;color:var(--amber)}
+      .card h4{margin:6px 0 0;font:700 19px/1.15 Archivo,'IBM Plex Sans Arabic',sans-serif;letter-spacing:-.01em}
+      .card p{margin:0;font-size:14.5px;color:var(--soft)}
+      .card .why{font:italic 500 16px/1.35 'Cormorant Garamond',serif;color:var(--flame)}
+      .card .go{margin-top:auto;font:750 9.5px Archivo,sans-serif;font-stretch:125%;letter-spacing:.2em;text-transform:uppercase;color:var(--amber)}
+      .grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:36px}
+      .frame{margin-top:34px;border-radius:24px;overflow:hidden;border:1px solid var(--line2);background:#050403;box-shadow:0 60px 120px -60px rgba(0,0,0,.9)}
+      .frame .bar{display:flex;align-items:center;gap:8px;height:42px;padding:0 16px;border-bottom:1px solid var(--line)}
+      .frame .bar i{width:11px;height:11px;border-radius:50%;background:#2a201b}
+      .frame .bar span{margin-inline-start:10px;font:500 11px 'Martian Mono',monospace;color:var(--muted)}
+      .frame .bar a{margin-inline-start:auto;font:750 9.5px Archivo,sans-serif;font-stretch:125%;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);text-decoration:none}
+      .view{position:relative;width:100%;aspect-ratio:1440/900;overflow:hidden;background:#0B0807}
+      .view iframe{position:absolute;left:0;top:0;width:1440px;height:900px;border:0;transform-origin:0 0}
+      .bullets{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:22px}
+      .bullets div{padding:20px;border-radius:20px;background:var(--panel);border:1px solid var(--line)}
+      .bullets b{display:block;font:700 16px Archivo,sans-serif;margin-bottom:6px}
+      .bullets span{color:var(--soft);font-size:14.5px}
+      .two{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+      .steps{display:grid;gap:12px}
+      .step{display:flex;gap:18px;padding:20px;border-radius:20px;background:var(--panel);border:1px solid var(--line)}
+      .step b{font:200 30px/1 'Martian Mono',monospace;color:var(--amber);min-width:34px}
+      .honest{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:34px}
+      .honest div{padding:26px;border-radius:24px;background:var(--panel);border:1px solid var(--line)}
+      .honest h3{margin:0 0 12px;font:750 13px Archivo,sans-serif;font-stretch:125%;letter-spacing:.2em;text-transform:uppercase;color:var(--amber)}
+      .honest p{margin:0;color:var(--soft)}
+      .seal{display:inline-grid;place-items:center;width:46px;height:46px;border-radius:10px;background:radial-gradient(circle at 30% 25%,#b3313a,#7b151a 70%);font:800 26px 'Shippori Mincho B1',serif;transform:rotate(-6deg);box-shadow:inset 0 0 0 2px rgba(244,236,225,.16)}
+      footer{padding:44px 0 70px;color:var(--muted);font-size:14px;border-top:1px solid var(--line)}
+      @media (max-width:1180px){.five{grid-template-columns:repeat(3,1fr)}.grid{grid-template-columns:repeat(3,1fr)}}
+      @media (max-width:980px){.hero,.two{grid-template-columns:1fr}.five,.grid{grid-template-columns:repeat(2,1fr)}.honest,.bullets{grid-template-columns:1fr}}
+      @media (max-width:560px){.five,.grid{grid-template-columns:1fr}.brand img{height:34px}.facts{gap:22px}}
+      @media (prefers-reduced-motion:reduce){.glow{animation:none}}
+    </style>
+  </head>
+  <body>
+    <div class="glow"></div>
+    <div class="grain"></div>
+    <div class="wrap">
+      <header>
+        <a class="brand" href="./" translate="no" aria-label="Ninja"><img src="brand/logo.png" alt="Ninja" /></a>
+        <select id="lang" aria-label="Taal" translate="no">
+          <option value="nl">Nederlands</option>
+          <option value="en">English</option>
+          <option value="tr">Türkçe</option>
+          <option value="ar">العربية</option>
+          <option value="fr">Français</option>
+          <option value="de">Deutsch</option>
+          <option value="it">Italiano</option>
+        </select>
+      </header>
+      <main>
+        <div class="hero">
+          <div>
+            <div class="label">Voorstel voor Ninja · Vlaamsekaai 52, Antwerpen</div>
+            <h1 style="margin-top: 22px">Elke snede.<br /><span class="fire">Live.</span></h1>
+            <p class="serif" style="max-width: 600px; margin-top: 26px">Een eigen app, een beheerpaneel in 3D en een nieuwe website. De temperatuur in het vlees op deze seconde, de boer van je sla, de mensen in de zaal. Met Ninja’s echte kaart, prijzen en foto’s.</p>
+            <div class="cta">
+              <a class="btn ox" href="app/">Open de app</a>
+              <a class="btn bone" href="admin/">Open het paneel</a>
+              <a class="btn line" href="website/">Open de website</a>
+            </div>
+            <div class="facts">
+              <div><b>5</b><span>om over te praten</span></div>
+              <div><b>15</b><span>voor elke avond</span></div>
+              <div><b>3D</b><span>WebGPU, live</span></div>
+              <div><b>7</b><span>talen</span></div>
+            </div>
+          </div>
+          <div class="phone" id="phone"><div class="screen"><iframe id="app-frame" title="De app van Ninja" src="app/"></iframe></div></div>
+        </div>
+
+        <section>
+          <div class="label">Vijf om over te praten</div>
+          <h2 style="margin-top: 16px">Wat niemand<br /><span class="fire">anders heeft.</span></h2>
+          <p class="serif" style="max-width: 720px; margin-top: 18px">Detail is de luxe, precisie het statussymbool, en alles is gemaakt om te delen. Tik er een aan: hij opent in de telefoon hierboven.</p>
+          <div class="five" id="five"></div>
+        </section>
+
+        <section>
+          <div class="label">En vijftien voor elke avond</div>
+          <h2 style="margin-top: 16px">Geen rij buiten.<br /><span class="fire">Geen wachten op de rekening.</span></h2>
+          <div class="grid" id="fifteen"></div>
+        </section>
+
+        <section>
+          <div class="label">Het paneel</div>
+          <h2 style="margin-top: 16px">Ninja in 3D, live.</h2>
+          <p class="serif" style="max-width: 780px; margin-top: 18px">De zaal als digitale tweeling, op WebGPU: de spiezen voor het eikenvuur, de steenoven, de spaceship-bar, de gasten aan hun tafels en de rij buiten. Daarnaast het vuur in cijfers, de pas, de paspoorten, Match en de Wall, de clan en de cijfers van de avond.</p>
+          <div class="frame">
+            <div class="bar"><i></i><i></i><i></i><span>Ninja · Huis</span><a href="admin/" id="admin-link">Open ↗</a></div>
+            <div class="view" id="admin-view"><iframe id="admin-frame" title="Het paneel" src="admin/" tabindex="-1"></iframe></div>
+          </div>
+          <div class="bullets">
+            <div><b>De spies als dashboard</b><span>Kern, korst, vuur en gewicht, met een logboek van elke snede voor het FAVV.</span></div>
+            <div><b>Alles uit de app, meteen</b><span>De rij, bestellingen, een roep naar de ober, een çay voor een andere tafel, een flitsfoto voor de Wall.</span></div>
+            <div><b>Herkomst en terugroepen</b><span>Elke levering met lotnummer; kies een lot en je ziet welke borden en tafels het kregen.</span></div>
+          </div>
+        </section>
+
+        <section>
+          <div class="label">De website</div>
+          <h2 style="margin-top: 16px">Ninja-antwerp.be, opnieuw.</h2>
+          <p class="serif" style="max-width: 760px; margin-top: 18px">Het logo in echt 3D-leder boven het vuur, de spies live, het menu met prijzen, waar alles vandaan komt, en elk bordpaspoort om na te kijken.</p>
+          <div class="frame">
+            <div class="bar"><i></i><i></i><i></i><span>ninja-antwerp.be</span><a href="website/" id="web-link">Open ↗</a></div>
+            <div class="view" id="web-view"><iframe id="web-frame" title="De website" src="website/" tabindex="-1"></iframe></div>
+          </div>
+        </section>
+
+        <section class="two">
+          <div>
+            <div class="label">Samen live</div>
+            <h2 style="margin-top: 16px">Tik in de app.<br /><span class="fire">Zie het in de zaal.</span></h2>
+            <p class="serif" style="margin-top: 18px">Open de app en het paneel naast elkaar, in dezelfde browser.</p>
+          </div>
+          <div class="steps">
+            <div class="step"><b>1</b><div>Schuif digitaal aan: je staat buiten in de rij in 3D, met je clan-rang. Noor roept je binnen vanaf het paneel.</div></div>
+            <div class="step"><b>2</b><div>Bestel aan tafel: het ticket verschijnt aan de pas. Baran snijdt, en jij krijgt het paspoort met de seconde en de temperatuur.</div></div>
+            <div class="step"><b>3</b><div>Stuur een çay naar een andere tafel met Match: het paneel ziet wat waar gebracht moet worden.</div></div>
+            <div class="step"><b>4</b><div>Maak een flitsfoto met de cijfers erop: na een tik op het paneel staat hij op de Wall en op de website.</div></div>
+          </div>
+        </section>
+
+        <section>
+          <div class="label">Echt en demo</div>
+          <h2 style="margin-top: 16px">Wat klopt,<br /><span class="fire">en wat is verzonnen.</span></h2>
+          <div class="honest">
+            <div>
+              <h3>Echt</h3>
+              <p>Van ninja-antwerp.be en de kaart van juni 2026: alle gerechten, beschrijvingen en prijzen, de huisregels (geen toegevoegde suiker of zout behalve Himalayazout, het eikenvuur, de steenoven, desem, frieten in rundvet), halal, de sauzen, het adres, de openingsuren, telefoon, e-mail, ondernemingsnummer, de parkings, de vragen en antwoorden, de vacature, het logo en alle foto’s van Ninja. Het interieur zoals Le Fooding het beschrijft.</p>
+            </div>
+            <div>
+              <h3>Demo</h3>
+              <p>Het team (Baran, Deniz, Ilyas, Noor, Seppe, Fien, Robbe, Yasmine), Margaux en alle andere gasten, de bestellingen en de rij, alle sensorwaarden, de leveranciers, plaatsen en lotnummers (voorbeelden), de mensen in Match (stockportretten), de rangen, drops, avonden en de eigen spies met hun prijzen, en de zaal in 3D. Ninja’s eigenaars en team worden nergens genoemd. Er zijn geen verzonnen recensies.</p>
+            </div>
+          </div>
+        </section>
+      </main>
+      <footer><span class="seal" translate="no">忍</span>&nbsp;&nbsp; Ninja Antwerp · Vlaamsekaai 52, 2000 Antwerpen · demo door Anka Enterprises</footer>
+    </div>
+    <script>
+      const FIVE = [
+        { no: 1, title: 'Live spies', line: 'De temperatuur in de volgende snede op deze seconde, de korst, het eikenvuur, de kilo’s die er nog hangen. In 3D, met warmtebeeld.', why: '“Hoe warm is mijn döner nu?”', path: '/spies' },
+        { no: 2, title: 'Bordpaspoort', line: 'Elk bord van de spies krijgt een nummer: de seconde van de snede, de graden, wie sneed, en waar de sla vandaan komt en wanneer ze geoogst werd.', why: 'Detail als statussymbool.', path: '/paspoorten' },
+        { no: 3, title: 'Ninja Match', line: 'Wie Match aanzet, ziet wie er vanavond is. Stuur een çay naar een andere tafel; wederzijds, dan opent een gesprek. Om tien uur is alles weg.', why: 'Zoals de koffiezaak die mensen liet matchen.', path: '/match' },
+        { no: 4, title: 'Flash & story', line: 'Een camera in Ninja’s eigen flitslook, met de live cijfers van je bord erop, klaar voor Instagram. De mooiste gaan op de Wall in de zaal.', why: 'Elke gast wordt reclame.', path: '/flash' },
+        { no: 5, title: 'Eigen spies', line: 'Je eigen döner met je naam in messing, met de hand gelegd, aan tafel gesneden. Voor de opening of op maandag, de zaal voor jullie.', why: 'Voor wie wil opvallen.', path: '/eigen-spies' },
+      ];
+      const FIFTEEN = [
+        { no: 6, title: 'Digitale rij', line: 'Ninja werkt zonder reservaties: schuif aan vanaf je telefoon en ga iets drinken.', path: '/rij' },
+        { no: 7, title: 'Bestellen uit de rij', line: 'Alvast bestellen terwijl je wacht: het staat op tafel als je gaat zitten.', path: '/menu' },
+        { no: 8, title: 'Samen aan tafel', line: 'Scan de code, iedereen bestelt op hetzelfde ticket; roep de ober of meer lavash.', path: '/tafel?scan=1' },
+        { no: 9, title: 'Plaats kiezen in 3D', line: 'Aan het vuur, op de lederen bank, aan de spaceship-bar of aan het raam.', path: '/plaats' },
+        { no: 10, title: 'Betalen & splitsen', line: 'Payconiq by Bancontact, Apple Pay; door vier, per gerecht; factuur via Peppol.', path: '/betalen' },
+        { no: 11, title: 'Ninja Clan', line: 'Genin, Chūnin, Jōnin, Kage: wie vaker komt, wacht korter. Met een kaart in je wallet.', path: '/clan' },
+        { no: 12, title: 'Drops', line: 'Een Wagyu-spies van veertig porties, het T-shirt uit de zaal. Jōnin een uur eerder.', path: '/drops' },
+        { no: 13, title: 'Sensei', line: 'De gastheer in je zak: wat te nemen voor vier, halal, allergenen, waar het vandaan komt.', path: '/sensei' },
+        { no: 14, title: 'Dieet & allergenen', line: 'Vegetarisch, zonder gluten, zonder sesam. Ook: de frieten zijn in rundvet gebakken.', path: '/menu' },
+        { no: 15, title: 'Ninja Gift', line: 'Trakteer iemand op een çay of een Iskender voor twee, via een link.', path: '/gift' },
+        { no: 16, title: 'Drukte & beste moment', line: 'Hoe vol het nu is, en wanneer het vanavond het rustigst wordt.', path: '/rij' },
+        { no: 17, title: 'Je vaste', line: 'Iskender, mix, anderhalve portie, ezme en ayran: met één tik opnieuw.', path: '/menu' },
+        { no: 18, title: 'Ninja Nights', line: 'Vinyl & vuur, rakı-donderdag, een gastchef uit Gaziantep.', path: '/nights' },
+        { no: 19, title: 'Nu op de speakers', line: 'Welk nummer er speelt, en de playlist van de zaak.', path: '/muziek' },
+        { no: 20, title: 'Na je bezoek', line: 'Zeg het de chef rechtstreeks, en wie wil een recensie op Google.', path: '/feedback' },
+      ];
+      const LANG = window.LANG || 'nl';
+      const withLang = (href) => (LANG === 'nl' ? href : href + (href.includes('?') ? '&' : '?') + 'lang=' + LANG);
+      const menu = document.getElementById('lang');
+      menu.value = LANG;
+      menu.addEventListener('change', () => {
+        const url = new URL(location.href);
+        url.searchParams.set('lang', menu.value);
+        location.replace(url.toString());
+      });
+      for (const a of document.querySelectorAll('a[href^="app/"], a[href^="admin/"], a[href^="website/"]')) a.setAttribute('href', withLang(a.getAttribute('href')));
+      const appFrame = document.getElementById('app-frame');
+      appFrame.src = withLang('app/');
+      document.getElementById('admin-frame').src = withLang('admin/');
+      document.getElementById('web-frame').src = withLang('website/');
+      const esc = (t) => t.replace(/&/g, '&amp;').replace(/</g, '&lt;');
+      const open = (path) => {
+        appFrame.src = withLang('app' + path + (path.includes('?') ? '&' : '?') + 'intro=0');
+        document.getElementById('phone').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      };
+      for (const f of FIVE) {
+        const b = document.createElement('button');
+        b.className = 'card big';
+        b.innerHTML = '<span class="no">' + String(f.no).padStart(2, '0') + '</span><h4>' + esc(f.title) + '</h4><p>' + esc(f.line) + '</p><span class="why">' + esc(f.why) + '</span><span class="go">Bekijk in de app →</span>';
+        b.addEventListener('click', () => open(f.path));
+        document.getElementById('five').appendChild(b);
+      }
+      for (const f of FIFTEEN) {
+        const b = document.createElement('button');
+        b.className = 'card';
+        b.innerHTML = '<span class="no">' + String(f.no).padStart(2, '0') + '</span><h4>' + esc(f.title) + '</h4><p>' + esc(f.line) + '</p><span class="go">Bekijk →</span>';
+        b.addEventListener('click', () => open(f.path));
+        document.getElementById('fifteen').appendChild(b);
+      }
+      // Scale the app to the phone and the panel and the site to their windows.
+      const fit = () => {
+        const screen = appFrame.parentElement;
+        const k = screen.clientWidth / 390;
+        appFrame.style.transform = 'scale(' + k + ')';
+        appFrame.style.height = screen.clientHeight / k + 'px';
+        for (const id of ['admin', 'web']) {
+          const view = document.getElementById(id + '-view');
+          document.getElementById(id + '-frame').style.transform = 'scale(' + view.clientWidth / 1440 + ')';
+        }
+      };
+      addEventListener('resize', fit);
+      fit();
+      // Dutch is written in the page; another language looks each text up in the same dictionary as the app and the
+      // panel (i18n/<lang>.json), with {placeholders} for names and numbers and " · " parts looked up one by one.
+      function translator(dict) {
+        const own = (k) => Object.prototype.hasOwnProperty.call(dict, k);
+        const folded = new Map(Object.keys(dict).filter((k) => !k.includes('{')).map((k) => [k.toLowerCase(), k]));
+        const escape = (t) => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        const patterns = Object.keys(dict)
+          .filter((k) => k.includes('{'))
+          .map((k) => {
+            const parts = k.split(/\{(\w+)\}/);
+            const literal = parts.filter((_, i) => i % 2 === 0).join('');
+            if (!/\p{L}/u.test(literal)) return null;
+            const re = new RegExp('^' + parts.map((p, i) => (i % 2 ? '(.+?)' : escape(p))).join('') + '$', 's');
+            return { k, re, names: parts.filter((_, i) => i % 2), weight: literal.length };
+          })
+          .filter(Boolean)
+          .sort((a, b) => b.weight - a.weight);
+        const look = (text, depth) => {
+          const core = text.trim();
+          if (!core || !/\p{L}/u.test(core)) return null;
+          const wrap = (t) => text.replace(core, () => t);
+          if (own(core)) return wrap(dict[core]);
+          const f = folded.get(core.toLowerCase());
+          if (f) return wrap(dict[f]);
+          const punct = /^(.*?\p{L}.*?)([,.:;!?…→↗]+)$/u.exec(core);
+          if (punct && own(punct[1].trim())) return wrap(dict[punct[1].trim()] + ' ' + punct[2]);
+          if (depth > 3) return null;
+          for (const p of patterns) {
+            const m = p.re.exec(core);
+            if (!m) continue;
+            const values = {};
+            p.names.forEach((n, i) => (values[n] = look(m[i + 1], depth + 1) ?? m[i + 1]));
+            return wrap(dict[p.k].replace(/\{(\w+)\}/g, (x, n) => values[n] ?? x));
+          }
+          for (const sep of [' · ', ' — ', ' – ', ': ']) {
+            if (!core.includes(sep)) continue;
+            let changed = false;
+            const out = core.split(sep).map((part) => {
+              const t = look(part, depth + 1);
+              if (t != null) changed = true;
+              return t ?? part;
+            });
+            if (changed) return wrap(out.join(sep));
+          }
+          return null;
+        };
+        return (text) => look(text, 0) ?? text;
+      }
+      function translatePage(dict) {
+        const t = translator(dict);
+        const skip = 'script, style, [translate="no"]';
+        const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+          acceptNode: (n) => (n.parentElement && !n.parentElement.closest(skip) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT),
+        });
+        const nodes = [];
+        while (walker.nextNode()) nodes.push(walker.currentNode);
+        for (const n of nodes) {
+          if (!/\p{L}/u.test(n.nodeValue)) continue;
+          const text = n.nodeValue.replace(/\s+/g, ' ');
+          const out = t(text);
+          if (out !== text) n.nodeValue = out;
+        }
+        for (const el of document.querySelectorAll('[title], [alt], [aria-label]')) {
+          for (const name of ['title', 'alt', 'aria-label']) {
+            const v = el.getAttribute(name);
+            if (v && !el.closest('[translate="no"]')) el.setAttribute(name, t(v));
+          }
+        }
+        document.title = t(document.title);
+      }
+      const shown = () => document.documentElement.classList.remove('i18n-wait');
+      if (LANG !== 'nl') {
+        setTimeout(shown, 2500);
+        fetch('i18n/' + LANG + '.json')
+          .then((r) => r.json())
+          .then(translatePage)
+          .catch(() => {})
+          .finally(shown);
+      }
+    </script>
+  </body>
+</html>

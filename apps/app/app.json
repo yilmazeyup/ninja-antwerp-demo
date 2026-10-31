@@ -1,0 +1,36 @@
+{
+  "expo": {
+    "name": "Ninja",
+    "slug": "ninja-antwerp-demo",
+    "scheme": "ninja",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "dark",
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "be.ninjaantwerp.demo"
+    },
+    "android": {
+      "package": "be.ninjaantwerp.demo",
+      "adaptiveIcon": {
+        "backgroundColor": "#0B0807",
+        "foregroundImage": "./assets/icon.png"
+      },
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "favicon": "./assets/favicon.png",
+      "name": "Ninja Antwerp",
+      "shortName": "Ninja",
+      "themeColor": "#0B0807",
+      "backgroundColor": "#0B0807"
+    },
+    "plugins": [
+      ["expo-router", { "asyncRoutes": { "web": false } }],
+      "expo-font",
+      ["expo-splash-screen", { "backgroundColor": "#0B0807", "image": "./assets/splash-icon.png", "imageWidth": 240 }],
+      "expo-image"
+    ]
+  }
+}

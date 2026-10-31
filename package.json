@@ -1,0 +1,17 @@
+{
+  "name": "ninja-antwerp-demo",
+  "private": true,
+  "workspaces": [
+    "apps/app",
+    "packages/*"
+  ],
+  "scripts": {
+    "app": "npm --workspace ninja-app run start",
+    "ios": "npm --workspace ninja-app run ios",
+    "web": "npm --workspace ninja-app run web",
+    "studio": "npm --prefix apps/web run dev",
+    "typecheck": "npm --workspace ninja-app run typecheck && npm --prefix apps/web run typecheck",
+    "site": "node scripts/build-site.mjs",
+    "site:serve": "node scripts/serve-site.mjs"
+  }
+}

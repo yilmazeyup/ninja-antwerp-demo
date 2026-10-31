@@ -1,0 +1,61 @@
+# Builds the demo site on every push to main and publishes it on GitHub Pages:
+#   /         start page that explains the demo (site/index.html)
+#   /app/     the guest app, exported for the web (also as 404.html, so a link straight to a screen opens it)
+#   /admin/   the management panel with Ninja in 3D
+#   /website/ the website concept
+# See scripts/build-site.mjs.
+name: Demo site
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            apps/web/package-lock.json
+
+      - name: Install the guest app
+        run: npm ci --no-audit --no-fund
+
+      - name: Install the panel and the website
+        run: npm ci --prefix apps/web --no-audit --no-fund
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Build the site
+        run: node scripts/build-site.mjs /ninja-antwerp-demo
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
