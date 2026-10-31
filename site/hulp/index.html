@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="nl-BE">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- A demo with fictional guests: keep it out of search results. -->
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#0B0807" />
+    <title>Ninja · Uitlegvideo</title>
+    <meta name="description" content="Uitlegvideo: de eigen app, het beheerpaneel in 3D en de nieuwe website van Ninja aan de Vlaamsekaai in Antwerpen. Demo met fictieve gasten." />
+    <script>
+      // The language: ?lang= first, then the last choice on this device (the start page, the app, the panel and the
+      // website read the same), else Dutch as spoken in Belgium.
+      (function () {
+        var all = ['nl', 'en', 'tr', 'ar', 'fr', 'de', 'it'];
+        var tags = { nl: 'nl-BE', fr: 'fr-BE' };
+        var lang = 'nl';
+        try {
+          var asked = new URLSearchParams(location.search).get('lang');
+          var saved = localStorage.getItem('ninja-lang');
+          lang = all.indexOf(asked) >= 0 ? asked : all.indexOf(saved) >= 0 ? saved : 'nl';
+          localStorage.setItem('ninja-lang', lang);
+        } catch (e) {}
+        var root = document.documentElement;
+        root.lang = tags[lang] || lang;
+        root.dir = lang === 'ar' ? 'rtl' : 'ltr';
+        window.LANG = lang;
+      })();
+    </script>
+    <link rel="icon" type="image/png" href="../favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Martian+Mono:wdth,wght@75..112.5,100..800&family=Cormorant+Garamond:ital,wght@1,400;1,500;1,600&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap"
+    />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@800&text=%E5%BF%8D&display=swap" />
+    <style>
+      :root{--bg:#0B0807;--bg2:#110C0A;--panel:#18100D;--panel2:#22150F;--ink:#F4ECE1;--soft:#CDBFAF;--muted:#8F8174;--faint:#5C5047;--line:rgba(244,236,225,.09);--line2:rgba(244,236,225,.17);--stitch:rgba(244,236,225,.26);--ox:#7B151A;--ox2:#9C242A;--ember:#FF6A2A;--amber:#FFB547;--flame:#FFE6A8;--chrome:#C9CDD3}
+      *{box-sizing:border-box}
+      html,body{margin:0;background:var(--bg);color:var(--ink)}
+      body{font:16px/1.6 Archivo,'IBM Plex Sans Arabic',system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+      [dir='rtl'] body{font-family:'IBM Plex Sans Arabic',Archivo,system-ui,sans-serif}
+      a{color:inherit}
+      ::selection{background:var(--ox2);color:var(--ink)}
+      .wrap{position:relative;z-index:1;max-width:1320px;margin:0 auto;padding:0 28px}
+      .glow{position:fixed;inset:auto -20vw -40vh -20vw;height:80vh;pointer-events:none;z-index:0;background:radial-gradient(closest-side,rgba(255,106,42,.12),transparent) 20% 60%/55% 80% no-repeat,radial-gradient(closest-side,rgba(156,36,42,.2),transparent) 80% 50%/60% 90% no-repeat;filter:blur(10px);animation:drift 28s ease-in-out infinite alternate}
+      @keyframes drift{to{transform:translate3d(6vw,-4vh,0) scale(1.08)}}
+      .grain{position:fixed;inset:0;pointer-events:none;z-index:2;opacity:.05;mix-blend-mode:overlay;background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+      header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:22px 0}
+      .brand img{height:42px;display:block}
+      .actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+      .pill,select{height:42px;padding:0 18px;border-radius:999px;border:1px solid var(--line2);background:var(--panel);color:var(--ink);font:750 10.5px Archivo,'IBM Plex Sans Arabic',sans-serif;font-stretch:125%;letter-spacing:.17em;text-transform:uppercase;text-decoration:none;display:inline-flex;align-items:center;gap:8px;cursor:pointer;transition:border-color .3s,transform .3s}
+      .pill:hover,select:hover{border-color:var(--stitch);transform:translateY(-1px)}
+      select{appearance:none;padding-inline-end:34px;background:var(--panel) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6'><path d='M1 1l4 4 4-4' fill='none' stroke='%23CDBFAF' stroke-width='1.3'/></svg>") no-repeat right 16px center}
+      [dir='rtl'] select{background-position:left 16px center}
+      select option{color:#0B0807}
+      [dir='rtl'] .pill,[dir='rtl'] select{letter-spacing:0;font-size:13px;text-transform:none}
+      .label{display:inline-flex;align-items:center;gap:12px;font:750 10.5px/1.3 Archivo,'IBM Plex Sans Arabic',sans-serif;font-stretch:125%;letter-spacing:.22em;text-transform:uppercase;color:var(--amber)}
+      .label::before{content:'';width:22px;height:1px;background:linear-gradient(90deg,transparent,var(--chrome))}
+      [dir='rtl'] .label{letter-spacing:0;font-size:13px}
+      [dir='rtl'] .label::before{background:linear-gradient(270deg,transparent,var(--chrome))}
+      .mono{font-family:'Martian Mono',ui-monospace,monospace;font-stretch:87.5%;font-variant-numeric:tabular-nums}
+      h1,h2,h3{margin:0;font-family:Archivo,'IBM Plex Sans Arabic',sans-serif}
+      h1{margin-top:20px;font-weight:800;font-stretch:112.5%;font-size:clamp(46px,6.6vw,98px);line-height:.93;letter-spacing:-.02em;text-transform:uppercase}
+      h2{font-weight:750;font-stretch:112.5%;font-size:clamp(30px,3.6vw,50px);line-height:1;letter-spacing:-.015em;text-transform:uppercase}
+      [dir='rtl'] h1,[dir='rtl'] h2{letter-spacing:0;line-height:1.2;text-transform:none}
+      .fire{background:linear-gradient(100deg,#FFE6A8,#FFB547 30%,#FF6A2A 65%,#C73A16);-webkit-background-clip:text;background-clip:text;color:transparent}
+      .serif{font:italic 500 clamp(20px,1.8vw,25px)/1.4 'Cormorant Garamond',Georgia,serif;color:var(--soft)}
+      [dir='rtl'] .serif{font:400 19px/1.75 'IBM Plex Sans Arabic',sans-serif}
+      .intro{padding:34px 0 38px;max-width:900px}
+      .lead{margin:22px 0 0;max-width:720px}
+      .leather{position:relative;border-radius:24px;background:linear-gradient(180deg,rgba(244,236,225,.045),rgba(244,236,225,0) 38%),var(--panel);border:1px solid var(--line)}
+      .leather::after{content:'';position:absolute;inset:6px;border-radius:19px;border:1px dashed var(--stitch);opacity:.42;pointer-events:none}
+      .player{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:20px;align-items:start}
+      .screen{border-radius:22px;overflow:hidden;background:#050403;border:1px solid var(--line2);box-shadow:0 60px 120px -60px rgba(0,0,0,.95),0 0 120px -50px rgba(255,106,42,.35)}
+      video{display:block;width:100%;height:auto;aspect-ratio:16/9;background:#050403}
+      video::cue{font:500 21px/1.35 Archivo,'IBM Plex Sans Arabic',sans-serif;color:#F4ECE1;background:rgba(11,8,7,.8)}
+      .chapters{padding:20px 12px 14px;max-height:calc((min(1320px,100vw) - 56px - 360px) * 9 / 16);display:flex;flex-direction:column}
+      .chapters h2{margin:2px 12px 10px;font-size:12px;font-weight:750;font-stretch:125%;letter-spacing:.22em;color:var(--muted);line-height:1.3}
+      [dir='rtl'] .chapters h2{letter-spacing:0;font-size:14px}
+      .chapters ol{list-style:none;margin:0;padding:0 2px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--faint) transparent}
+      .chapters button{position:relative;z-index:1;display:grid;grid-template-columns:28px 1fr auto;align-items:center;gap:10px;width:100%;padding:5px 10px;border:1px solid transparent;border-radius:14px;background:transparent;color:var(--soft);font:500 14.5px/1.3 Archivo,'IBM Plex Sans Arabic',sans-serif;text-align:start;cursor:pointer;transition:background .3s,color .3s,border-color .3s}
+      .chapters button:hover{background:rgba(244,236,225,.04);color:var(--ink)}
+      .chapters button:focus-visible{outline:1px solid var(--amber);outline-offset:1px}
+      .chapters .no{font:400 11.5px 'Martian Mono',monospace;font-stretch:87.5%;color:var(--faint)}
+      .chapters time{font:400 11.5px 'Martian Mono',monospace;font-stretch:87.5%;color:var(--muted)}
+      .chapters button.on{color:var(--ink);background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,0) 55%),linear-gradient(160deg,#8E2027,#5E1016);border-color:rgba(244,236,225,.22)}
+      .chapters button.on .no,.chapters button.on time{color:var(--flame)}
+      section.block{padding:76px 0 0}
+      .feats{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:22px}
+      .feat{padding:20px 20px 22px}
+      .feat .n{font:400 12px 'Martian Mono',monospace;font-stretch:87.5%;color:var(--amber)}
+      .feat h4{margin:10px 0 6px;font:700 17px/1.2 Archivo,'IBM Plex Sans Arabic',sans-serif;letter-spacing:-.005em}
+      .feat p{margin:0;font-size:14px;line-height:1.5;color:var(--soft)}
+      .feats.big .feat{background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,0) 45%),radial-gradient(120% 140% at 15% 0%,#8E2027,#5E1016 55%,#3A0A0D);border-color:rgba(244,236,225,.14)}
+      .feats.big .feat p{color:#E9D9C8}
+      .feats.big .feat .n{color:var(--flame)}
+      .sub{margin-top:40px;font:750 11px Archivo,'IBM Plex Sans Arabic',sans-serif;font-stretch:125%;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+      [dir='rtl'] .sub{letter-spacing:0;font-size:14px}
+      .honest{display:flex;gap:22px;align-items:flex-start;margin-top:22px;padding:26px 28px}
+      .seal{flex:none;display:inline-grid;place-items:center;width:46px;height:46px;border-radius:10px;background:radial-gradient(circle at 30% 25%,#b3313a,#7b151a 70%);font:800 26px 'Shippori Mincho B1',serif;transform:rotate(-6deg);box-shadow:inset 0 0 0 2px rgba(244,236,225,.16)}
+      .honest b{display:block;font-weight:600;font-size:17px;line-height:1.45}
+      .honest span{display:block;margin-top:6px;color:var(--muted);font-size:14.5px}
+      footer{margin-top:76px;padding:30px 0 60px;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
+      @media (max-width:1180px){.feats{grid-template-columns:repeat(3,1fr)}}
+      @media (max-width:980px){.player{grid-template-columns:1fr}.chapters{max-height:none}.chapters ol{overflow:visible}}
+      @media (max-width:760px){.feats{grid-template-columns:repeat(2,1fr)}.brand img{height:34px}header{flex-wrap:wrap}}
+      @media (max-width:520px){.wrap{padding:0 16px}.feats{grid-template-columns:1fr}.pill,select{height:38px;padding:0 14px}select{padding-inline-end:32px}.honest{padding:22px 20px}}
+      @media (prefers-reduced-motion:reduce){.glow{animation:none}}
+    </style>
+  </head>
+  <body>
+    <div class="glow"></div>
+    <div class="grain"></div>
+    <div class="wrap">
+      <header>
+        <a class="brand" href="../" id="home" translate="no" aria-label="Ninja"><img src="../brand/logo.png" alt="Ninja" /></a>
+        <div class="actions">
+          <a class="pill" id="back" href="../">← Terug naar de demo</a>
+          <select id="lang" aria-label="Taal en ondertitels" translate="no">
+            <option value="nl">Nederlands (België)</option>
+            <option value="en">English</option>
+            <option value="tr">Türkçe</option>
+            <option value="ar">العربية</option>
+            <option value="fr">Français</option>
+            <option value="de">Deutsch</option>
+            <option value="it">Italiano</option>
+          </select>
+        </div>
+      </header>
+      <main>
+        <section class="intro">
+          <div class="label" id="kicker">Uitlegvideo · 2:45</div>
+          <h1 id="title">Ninja in <span class="fire">drie minuten.</span></h1>
+          <p class="serif lead" id="lead">De eigen app, het beheerpaneel in 3D en de nieuwe website: wat ze doen en hoe ze samenwerken. Ingesproken in het Vlaams, met ondertitels in zeven talen.</p>
+        </section>
+        <section class="player">
+          <div class="screen">
+            <video id="video" controls playsinline preload="metadata" poster="poster.jpg">
+              <source src="ninja-uitleg.mp4" type="video/mp4" />
+            </video>
+          </div>
+          <nav class="chapters leather" aria-labelledby="chapters-title">
+            <h2 id="chapters-title">Hoofdstukken</h2>
+            <ol id="chapters"></ol>
+          </nav>
+        </section>
+        <section class="block">
+          <div class="label" id="f-kicker">Wat je in de film ziet</div>
+          <h2 id="f-title" style="margin-top: 16px">Twintig functies</h2>
+          <div class="sub" id="five-title">Vijf om over te praten</div>
+          <div class="feats big" id="five"></div>
+          <div class="sub" id="fifteen-title">En vijftien voor elke avond</div>
+          <div class="feats" id="fifteen"></div>
+        </section>
+        <section class="block">
+          <div class="label" id="h-kicker">Echt en demo</div>
+          <div class="honest leather">
+            <span class="seal" translate="no" aria-hidden="true">忍</span>
+            <div><b id="honest">Demo met fictieve gasten en voorbeeldleveranciers. Menu, prijzen, logo en foto’s: Ninja Antwerp.</b><span id="honest-more"></span></div>
+          </div>
+        </section>
+      </main>
+      <footer id="footer">Ninja Antwerp · Vlaamsekaai 52, 2000 Antwerpen · demo door Anka Enterprises</footer>
+    </div>
+    <script>
+      // The page's own words in seven languages. The chapter titles come from chapters.json, the subtitles from the
+      // .vtt files, the twenty features from the demo's own dictionaries (written in here).
+      const T = {
+        nl: { doc: 'Ninja · Uitlegvideo', kicker: 'Uitlegvideo · 2:45', title: 'Ninja in <span class="fire">drie minuten.</span>', lead: 'De eigen app, het beheerpaneel in 3D en de nieuwe website: wat ze doen en hoe ze samenwerken. Ingesproken in het Vlaams, met ondertitels in zeven talen.', back: '← Terug naar de demo', select: 'Taal en ondertitels', chapters: 'Hoofdstukken', fKicker: 'Wat je in de film ziet', fTitle: 'Twintig functies', hKicker: 'Echt en demo', honest: 'Demo met fictieve gasten en voorbeeldleveranciers. Menu, prijzen, logo en foto’s: Ninja Antwerp.', honestMore: 'Ninja’s eigenaars en team worden nergens genoemd. Het team, de gasten, de bestellingen en alle sensorwaarden in de film zijn verzonnen.', footer: 'Ninja Antwerp · Vlaamsekaai 52, 2000 Antwerpen · demo door Anka Enterprises' },
+        en: { doc: 'Ninja · Explainer video', kicker: 'Explainer video · 2:45', title: 'Ninja in <span class="fire">three minutes.</span>', lead: 'The app, the management panel in 3D and the new website: what they do and how they work together. Narrated in Flemish, with subtitles in seven languages.', back: '← Back to the demo', select: 'Language and subtitles', chapters: 'Chapters', fKicker: 'What you see in the film', fTitle: 'Twenty features', hKicker: 'Real and demo', honest: 'Demo with fictional guests and example suppliers. Menu, prices, logo and photos: Ninja Antwerp.', honestMore: 'Ninja’s owners and crew are not named anywhere. The team, the guests, the orders and every sensor reading in the film are made up.', footer: 'Ninja Antwerp · Vlaamsekaai 52, 2000 Antwerp · demo by Anka Enterprises' },
+        tr: { doc: 'Ninja · Tanıtım videosu', kicker: 'Tanıtım videosu · 2:45', title: 'Üç dakikada <span class="fire">Ninja.</span>', lead: 'Kendi uygulaması, 3D yönetim paneli ve yeni web sitesi: ne yaptıkları ve birlikte nasıl çalıştıkları. Flamanca seslendirme, yedi dilde altyazı.', back: '← Demoya dön', select: 'Dil ve altyazı', chapters: 'Bölümler', fKicker: 'Filmde gördüklerin', fTitle: 'Yirmi özellik', hKicker: 'Gerçek ve demo', honest: 'Kurgusal misafirler ve örnek tedarikçilerle bir demo. Menü, fiyatlar, logo ve fotoğraflar: Ninja Antwerp.', honestMore: 'Ninja’nın sahipleri ve ekibi hiçbir yerde anılmıyor. Filmdeki ekip, misafirler, siparişler ve tüm sensör değerleri uydurmadır.', footer: 'Ninja Antwerp · Vlaamsekaai 52, 2000 Anvers · demo: Anka Enterprises' },
+        ar: { doc: 'Ninja · فيديو تعريفي', kicker: 'فيديو تعريفي · 2:45', title: 'Ninja في <span class="fire">ثلاث دقائق.</span>', lead: 'التطبيق الخاص، ولوحة الإدارة ثلاثية الأبعاد، والموقع الجديد: ماذا تفعل وكيف تعمل معًا. التعليق الصوتي باللغة الفلمنكية، مع ترجمة بسبع لغات.', back: '→ العودة إلى العرض', select: 'اللغة والترجمة', chapters: 'الفصول', fKicker: 'ما تراه في الفيلم', fTitle: 'عشرون ميزة', hKicker: 'حقيقي وتجريبي', honest: 'عرض تجريبي بضيوف خياليين وموردين على سبيل المثال. القائمة والأسعار والشعار والصور: Ninja Antwerp.', honestMore: 'لا يُذكر مالكو Ninja ولا فريقه في أي مكان. الفريق والضيوف والطلبات وجميع قراءات المستشعرات في الفيلم متخيَّلة.', footer: 'Ninja Antwerp · Vlaamsekaai 52، 2000 أنتويرب · عرض من Anka Enterprises' },
+        fr: { doc: 'Ninja · Vidéo explicative', kicker: 'Vidéo explicative · 2:45', title: 'Ninja en <span class="fire">trois minutes.</span>', lead: 'L’app, le panneau de gestion en 3D et le nouveau site : ce qu’ils font et comment ils travaillent ensemble. Commentaire en flamand, sous-titres en sept langues.', back: '← Retour à la démo', select: 'Langue et sous-titres', chapters: 'Chapitres', fKicker: 'Ce que montre le film', fTitle: 'Vingt fonctions', hKicker: 'Réel et démo', honest: 'Démo avec des clients fictifs et des fournisseurs donnés en exemple. Carte, prix, logo et photos : Ninja Antwerp.', honestMore: 'Les propriétaires et l’équipe de Ninja ne sont cités nulle part. L’équipe, les clients, les commandes et toutes les valeurs des capteurs du film sont inventés.', footer: 'Ninja Antwerp · Vlaamsekaai 52, 2000 Anvers · démo par Anka Enterprises' },
+        de: { doc: 'Ninja · Erklärvideo', kicker: 'Erklärvideo · 2:45', title: 'Ninja in <span class="fire">drei Minuten.</span>', lead: 'Die eigene App, das Verwaltungspanel in 3D und die neue Website: was sie können und wie sie zusammenspielen. Gesprochen auf Flämisch, mit Untertiteln in sieben Sprachen.', back: '← Zurück zur Demo', select: 'Sprache und Untertitel', chapters: 'Kapitel', fKicker: 'Was du im Film siehst', fTitle: 'Zwanzig Funktionen', hKicker: 'Echt und Demo', honest: 'Demo mit fiktiven Gästen und Beispiel-Lieferanten. Karte, Preise, Logo und Fotos: Ninja Antwerp.', honestMore: 'Ninjas Inhaber und Team werden nirgends genannt. Das Team, die Gäste, die Bestellungen und alle Sensorwerte im Film sind erfunden.', footer: 'Ninja Antwerp · Vlaamsekaai 52, 2000 Antwerpen · Demo von Anka Enterprises' },
+        it: { doc: 'Ninja · Video esplicativo', kicker: 'Video esplicativo · 2:45', title: 'Ninja in <span class="fire">tre minuti.</span>', lead: 'L’app, il pannello di gestione in 3D e il nuovo sito: cosa fanno e come lavorano insieme. Voce in fiammingo, con sottotitoli in sette lingue.', back: '← Torna alla demo', select: 'Lingua e sottotitoli', chapters: 'Capitoli', fKicker: 'Cosa vedi nel film', fTitle: 'Venti funzioni', hKicker: 'Reale e demo', honest: 'Demo con ospiti immaginari e fornitori d’esempio. Menù, prezzi, logo e foto: Ninja Antwerp.', honestMore: 'I proprietari e lo staff di Ninja non sono nominati da nessuna parte. Il team, gli ospiti, gli ordini e tutti i valori dei sensori nel film sono inventati.', footer: 'Ninja Antwerp · Vlaamsekaai 52, 2000 Anversa · demo di Anka Enterprises' },
+      };
+      // The twenty features, as on the start page: [title, line] per language; five to talk about, fifteen for every evening.
+      const FEATURES = {"nl":{"groups":["Vijf om over te praten","En vijftien voor elke avond"],"items":[["Live spies","De temperatuur in de volgende snede op deze seconde, de korst, het eikenvuur, de kilo’s die er nog hangen. In 3D, met warmtebeeld."],["Bordpaspoort","Elk bord van de spies krijgt een nummer: de seconde van de snede, de graden, wie sneed, en waar de sla vandaan komt en wanneer ze geoogst werd."],["Ninja Match","Wie Match aanzet, ziet wie er vanavond is. Stuur een çay naar een andere tafel; wederzijds, dan opent een gesprek. Om tien uur is alles weg."],["Flash & story","Een camera in Ninja’s eigen flitslook, met de live cijfers van je bord erop, klaar voor Instagram. De mooiste gaan op de Wall in de zaal."],["Eigen spies","Je eigen döner met je naam in messing, met de hand gelegd, aan tafel gesneden. Voor de opening of op maandag, de zaal voor jullie."],["Digitale rij","Ninja werkt zonder reservaties: schuif aan vanaf je telefoon en ga iets drinken."],["Bestellen uit de rij","Alvast bestellen terwijl je wacht: het staat op tafel als je gaat zitten."],["Samen aan tafel","Scan de code, iedereen bestelt op hetzelfde ticket; roep de ober of meer lavash."],["Plaats kiezen in 3D","Aan het vuur, op de lederen bank, aan de spaceship-bar of aan het raam."],["Betalen & splitsen","Payconiq by Bancontact, Apple Pay; door vier, per gerecht; factuur via Peppol."],["Ninja Clan","Genin, Chūnin, Jōnin, Kage: wie vaker komt, wacht korter. Met een kaart in je wallet."],["Drops","Een Wagyu-spies van veertig porties, het T-shirt uit de zaal. Jōnin een uur eerder."],["Sensei","De gastheer in je zak: wat te nemen voor vier, halal, allergenen, waar het vandaan komt."],["Dieet & allergenen","Vegetarisch, zonder gluten, zonder sesam. Ook: de frieten zijn in rundvet gebakken."],["Ninja Gift","Trakteer iemand op een çay of een Iskender voor twee, via een link."],["Drukte & beste moment","Hoe vol het nu is, en wanneer het vanavond het rustigst wordt."],["Je vaste","Iskender, mix, anderhalve portie, ezme en ayran: met één tik opnieuw."],["Ninja Nights","Vinyl & vuur, rakı-donderdag, een gastchef uit Gaziantep."],["Nu op de speakers","Welk nummer er speelt, en de playlist van de zaak."],["Na je bezoek","Zeg het de chef rechtstreeks, en wie wil een recensie op Google."]]},"en":{"groups":["Five to talk about","And fifteen for every evening"],"items":[["Live spit","The temperature in the next cut at this very second, the crust, the oak fire, the kilos still on the spit. In 3D, with thermal imaging."],["Plate Passport","Every plate off the spit gets a number: the second of the cut, the degrees, who carved, and where the lettuce comes from and when it was picked."],["Ninja Match","Turn on Match and you see who’s here tonight. Send a çay to another table; if it’s mutual, a chat opens. At ten, it’s all gone."],["Flash & story","A camera in Ninja’s own flash look, with your plate’s live numbers on it, ready for Instagram. The best ones go on the Wall in the room."],["Private spit","Your own döner with your name in brass, stacked by hand, carved at the table. Before opening or on a Monday, the room is yours."],["Digital queue","Ninja doesn’t take bookings: join the queue from your phone and go for a drink."],["Ordering from the queue","Order ahead while you wait: it’s on the table when you sit down."],["Together at the table","Scan the code, everyone orders on the same ticket; call the waiter or ask for more lavash."],["Choose a seat in 3D","By the fire, on the leather banquette, at the spaceship bar or by the window."],["Pay & split","Payconiq by Bancontact, Apple Pay; split four ways, per dish; invoice via Peppol."],["Ninja Clan","Genin, Chūnin, Jōnin, Kage: the more often you come, the shorter you wait. With a card in your wallet."],["Drops","A forty-portion Wagyu spit, the T-shirt from the room. Jōnin an hour early."],["Sensei","The host in your pocket: what to order for four, halal, allergens, where it all comes from."],["Diet & allergens","Vegetarian, gluten-free, sesame-free. Also: the fries are fried in beef fat."],["Ninja Gift","Treat someone to a çay or an Iskender for two, via a link."],["How busy & best time","How busy it is now, and when it’s quietest tonight."],["Your usual","Iskender, mix, a portion and a half, ezme and ayran: again with one tap."],["Ninja Nights","Vinyl & fire, rakı Thursday, a guest chef from Gaziantep."],["Now on the speakers","Which track is playing, and the restaurant’s playlist."],["After your visit","Tell the chef directly, and a Google review if you like."]]},"tr":{"groups":["Konuşulacak beş şey","Ve her akşam için on beş tane daha"],"items":[["Canlı şiş","Bir sonraki kesimin şu saniyedeki sıcaklığı, kabuk, meşe ateşi, şişte kalan kilolar. 3D olarak, termal görüntüyle."],["Tabak pasaportu","Şişten gelen her tabağa bir numara verilir: kesimin saniyesi, derece, kimin kestiği, salatanın nereden geldiği ve ne zaman hasat edildiği."],["Ninja Match","Match’i açan, bu akşam kimlerin burada olduğunu görür. Başka bir masaya çay gönder; karşılıklıysa bir sohbet açılır. Saat onda her şey silinir."],["Flash & hikâye","Ninja’nın kendi flaş tarzında bir kamera; üzerinde tabağının canlı rakamları, Instagram’a hazır. En güzelleri salondaki Wall’a çıkar."],["Kendi şişin","Pirinçten adınla, elle dizilmiş, masada kesilen kendi dönerin. Açılıştan önce ya da pazartesi günü, salon sizin."],["Dijital sıra","Ninja rezervasyonsuz çalışır: telefonundan sıraya gir ve bir şeyler içmeye git."],["Sıradan sipariş","Beklerken sipariş ver: oturduğunda masanda olur."],["Aynı masada","Kodu okut, herkes aynı fişe sipariş versin; garsonu çağır ya da daha fazla lavaş iste."],["Yerini 3D olarak seç","Ateşin başında, deri sedirde, uzay gemisi barında ya da pencere kenarında."],["Öde ve böl","Payconiq by Bancontact, Apple Pay; dörde bölme, yemek başına; Peppol ile fatura."],["Ninja Clan","Genin, Chūnin, Jōnin, Kage: sık gelen daha az bekler. Cüzdanında bir kartla."],["Drops","Kırk porsiyonluk bir Wagyu şişi, salondaki tişört. Jōnin bir saat erken."],["Sensei","Cebindeki ev sahibi: dört kişiye ne alınır, helal, alerjenler, ne nereden gelir."],["Diyet ve alerjenler","Vejetaryen, glutensiz, susamsız. Ayrıca: patates kızartması sığır iç yağında kızartılmıştır."],["Ninja Gift","Bir bağlantıyla birine bir çay ya da iki kişilik Iskender ısmarla."],["Yoğunluk ve en iyi zaman","Şu an ne kadar dolu ve bu akşam en sakin ne zaman olacak."],["Her zamanki siparişin","Iskender, karışık, bir buçuk porsiyon, ezme ve ayran: tek dokunuşla yeniden."],["Ninja Nights","Plak & ateş, rakı perşembesi, Gaziantep’ten konuk şef."],["Şimdi hoparlörlerde","Hangi şarkının çaldığı ve mekânın çalma listesi."],["Ziyaretinden sonra","Doğrudan şefe söyle; isteyen Google’a da yorum bırakabilir."]]},"ar":{"groups":["خمس ميزات للحديث عنها","وخمس عشرة ميزة لكل أمسية"],"items":[["السيخ المباشر","حرارة الشريحة التالية في هذه الثانية، والقشرة، ونار البلوط، والكيلوغرامات المتبقية على السيخ. بالأبعاد الثلاثية، مع التصوير الحراري."],["جواز الطبق","كل طبق من السيخ يحمل رقمًا: ثانية التقطيع، والدرجات، ومن قطع، ومن أين جاء الخس ومتى قُطف."],["Ninja Match","من يفعّل Match يرى من هنا الليلة. أرسل شايًا إلى طاولة أخرى؛ وإن كان الإعجاب متبادلًا تُفتح محادثة. وعند العاشرة يختفي كل شيء."],["Flash والقصص","كاميرا بأسلوب الفلاش الخاص بـ Ninja، تحمل أرقام طبقك الحيّة، جاهزة لـ Instagram. وأجمل الصور تُعرض على Wall في الصالة."],["سيخك الخاص","دونر خاص بك يحمل اسمك بالنحاس، مرصوص يدويًا، ويُقطع على الطاولة. قبل الافتتاح أو يوم الاثنين، والصالة لكم."],["الطابور الرقمي","يعمل Ninja دون حجوزات: انضم إلى الطابور من هاتفك واذهب لتحتسي شيئًا."],["الطلب من الطابور","اطلب مسبقًا أثناء انتظارك: تجده على الطاولة حين تجلس."],["معًا على الطاولة","امسح الرمز، ويطلب الجميع على بطاقة الطلب نفسها؛ ونادِ النادل أو اطلب المزيد من Lavash."],["اختيار المقعد بالأبعاد الثلاثية","أمام النار، أو على الأريكة الجلدية، أو عند بار سفينة الفضاء، أو بجوار النافذة."],["الدفع والتقسيم","Payconiq by Bancontact و Apple Pay؛ بالتساوي على أربعة، أو حسب الطبق؛ وفاتورة عبر Peppol."],["Ninja Clan","Genin، Chūnin، Jōnin، Kage: من يأتي أكثر ينتظر أقل. مع بطاقة في محفظتك الرقمية."],["Drops","سيخ Wagyu بأربعين حصة، وقميص الصالة. و Jōnin قبل ساعة."],["Sensei","المضيف في جيبك: ماذا تطلب لأربعة، والحلال، ومسببات الحساسية، ومن أين يأتي كل شيء."],["النظام الغذائي ومسببات الحساسية","نباتي، وخالٍ من الغلوتين، وخالٍ من السمسم. ولاحظ أيضًا: البطاطس مقلية في دهن البقر."],["Ninja Gift","أهدِ أحدهم شايًا أو Iskender لشخصين، عبر رابط."],["الازدحام وأفضل وقت","مدى الازدحام الآن، ومتى يكون الأهدأ الليلة."],["طلبك المعتاد","Iskender، مزيج، حصة ونصف، Ezme و Ayran: من جديد بلمسة واحدة."],["Ninja Nights","الفينيل والنار، وخميس Rakı، وشيف ضيف من Gaziantep."],["يُعزف الآن","المقطوعة التي تُعزف، وقائمة تشغيل المطعم."],["بعد زيارتك","قلها للشيف مباشرةً، ولمن يشاء مراجعة على Google."]]},"fr":{"groups":["Cinq à mettre en avant","Et quinze pour chaque soirée"],"items":[["Broche en direct","La température de la prochaine tranche à la seconde près, la croûte, le feu de chêne, les kilos qui restent. En 3D, avec imagerie thermique."],["Passeport de l’assiette","Chaque assiette de la broche reçoit un numéro: la seconde de la coupe, les degrés, qui a tranché, d’où vient la salade et quand elle a été cueillie."],["Ninja Match","Qui active Match voit qui est là ce soir. Envoyez un çay à une autre table; si c’est réciproque, une conversation s’ouvre. À dix heures, tout disparaît."],["Flash & story","Un appareil photo au look flash propre à Ninja, avec les chiffres en direct de votre assiette, prêt pour Instagram. Les plus belles vont sur le Wall en salle."],["Broche privée","Votre propre döner, votre nom en laiton, monté à la main, tranché à table. Avant l’ouverture ou le lundi, la salle pour vous."],["File numérique","Ninja ne prend pas de réservations: prenez place dans la file depuis votre téléphone et allez boire un verre."],["Commander depuis la file","Commander en attendant: tout est sur la table quand vous vous asseyez."],["Ensemble à table","Scannez le code, chacun commande sur le même ticket; appelez le serveur ou demandez plus de lavash."],["Choisir sa place en 3D","Près du feu, sur la banquette en cuir, au bar spaceship ou côté fenêtre."],["Payer & partager","Payconiq by Bancontact, Apple Pay; en quatre parts, par plat; facture via Peppol."],["Ninja Clan","Genin, Chūnin, Jōnin, Kage: plus vous venez, moins vous attendez. Avec une carte dans votre wallet."],["Drops","Une broche de Wagyu de quarante portions, le T-shirt de la salle. Les Jōnin une heure plus tôt."],["Sensei","L’hôte dans votre poche: que prendre à quatre, le halal, les allergènes, l’origine de chaque produit."],["Régime & allergènes","Végétarien, sans gluten, sans sésame. Aussi: les frites sont cuites dans la graisse de bœuf."],["Ninja Gift","Offrez à quelqu’un un çay ou un Iskender pour deux, par un lien."],["Affluence & meilleur moment","L’affluence en ce moment, et l’heure la plus calme ce soir."],["Comme d’habitude","Iskender, mix, une portion et demie, ezme et ayran: à nouveau, d’un seul geste."],["Ninja Nights","Vinyle & feu, jeudi rakı, un chef invité de Gaziantep."],["En ce moment dans les enceintes","Le morceau qui passe, et la playlist de la maison."],["Après votre visite","Dites-le directement au chef, et pour qui le souhaite, un avis sur Google."]]},"de":{"groups":["Fünf zum Drüberreden","Und fünfzehn für jeden Abend"],"items":[["Live-Spieß","Die Temperatur im nächsten Schnitt in dieser Sekunde, die Kruste, das Eichenfeuer, die Kilos, die noch hängen. In 3D, mit Wärmebild."],["Tellerpass","Jeder Teller vom Spieß bekommt eine Nummer: die Sekunde des Schnitts, die Gradzahl, wer geschnitten hat, und woher der Salat kommt und wann er geerntet wurde."],["Ninja Match","Wer Match einschaltet, sieht, wer heute Abend da ist. Schick einen Çay an einen anderen Tisch; gegenseitig, dann öffnet sich ein Chat. Um zehn ist alles weg."],["Flash & Story","Eine Kamera in Ninjas eigenem Blitz-Look, mit den Live-Zahlen deines Tellers darauf, bereit für Instagram. Die schönsten kommen an die Wall im Gastraum."],["Eigener Spieß","Dein eigener Döner mit deinem Namen in Messing, von Hand geschichtet, am Tisch geschnitten. Vor der Öffnung oder am Montag, der Gastraum gehört euch."],["Digitale Warteschlange","Ninja arbeitet ohne Reservierungen: Stell dich per Handy an und geh etwas trinken."],["Aus der Schlange bestellen","Schon mal bestellen, während du wartest: Es steht auf dem Tisch, wenn du dich setzt."],["Zusammen am Tisch","Scan den Code, alle bestellen auf denselben Bon; ruf den Kellner oder mehr Lavash."],["Platz in 3D wählen","Am Feuer, auf der Lederbank, an der Spaceship-Bar oder am Fenster."],["Bezahlen & teilen","Payconiq by Bancontact, Apple Pay; durch vier, pro Gericht; Rechnung über Peppol."],["Ninja Clan","Genin, Chūnin, Jōnin, Kage: Wer öfter kommt, wartet kürzer. Mit einer Karte in deiner Wallet."],["Drops","Ein Wagyu-Spieß mit vierzig Portionen, das T-Shirt aus dem Gastraum. Jōnin eine Stunde früher."],["Sensei","Der Gastgeber in deiner Tasche: was zu viert bestellen, halal, Allergene, woher alles kommt."],["Ernährung & Allergene","Vegetarisch, ohne Gluten, ohne Sesam. Außerdem: Die Pommes sind in Rinderfett frittiert."],["Ninja Gift","Lade jemanden auf einen Çay oder einen Iskender für zwei ein, per Link."],["Andrang & bester Moment","Wie voll es gerade ist, und wann es heute Abend am ruhigsten wird."],["Dein Übliches","Iskender, Mix, anderthalb Portionen, Ezme und Ayran: mit einem Tipp noch einmal."],["Ninja Nights","Vinyl & Feuer, Rakı-Donnerstag, ein Gastkoch aus Gaziantep."],["Jetzt aus den Lautsprechern","Welcher Song läuft, und die Playlist des Lokals."],["Nach deinem Besuch","Sag es direkt dem Chef, und wer möchte, schreibt eine Bewertung auf Google."]]},"it":{"groups":["Cinque di cui parlare","E quindici per ogni sera"],"items":[["Spiedo live","La temperatura del prossimo taglio in questo secondo, la crosta, il fuoco di quercia, i chili che restano. In 3D, con immagine termica."],["Passaporto del piatto","Ogni piatto dallo spiedo riceve un numero: il secondo del taglio, i gradi, chi ha tagliato, e da dove viene l’insalata e quando è stata raccolta."],["Ninja Match","Chi attiva Match vede chi c’è stasera. Manda un çay a un altro tavolo; se è reciproco, si apre una chat. Alle dieci sparisce tutto."],["Flash & story","Una fotocamera con il look flash di Ninja, con i numeri live del tuo piatto sopra, pronta per Instagram. Le più belle finiscono sul Wall in sala."],["Spiedo privato","Il tuo döner con il tuo nome in ottone, composto a mano, tagliato al tavolo. Prima dell’apertura o di lunedì, la sala per voi."],["Fila digitale","Ninja non accetta prenotazioni: mettiti in fila dal telefono e vai a bere qualcosa."],["Ordinare dalla fila","Ordina mentre aspetti: lo trovi in tavola quando ti siedi."],["Insieme al tavolo","Scansiona il codice, tutti ordinano sulla stessa comanda; chiama il cameriere o chiedi altro lavash."],["Scegli il posto in 3D","Accanto al fuoco, sul divanetto in pelle, al bar astronave o alla finestra."],["Paga & dividi","Payconiq by Bancontact, Apple Pay; diviso in quattro, per piatto; fattura via Peppol."],["Ninja Clan","Genin, Chūnin, Jōnin, Kage: chi viene più spesso aspetta meno. Con una carta nel tuo wallet."],["Drops","Uno spiedo di Wagyu da quaranta porzioni, la T-shirt della sala. Jōnin un’ora prima."],["Sensei","Il padrone di casa in tasca: cosa prendere in quattro, halal, allergeni, da dove arriva tutto."],["Dieta & allergeni","Vegetariano, senza glutine, senza sesamo. Inoltre: le patatine fritte sono cotte nel grasso di manzo."],["Ninja Gift","Offri a qualcuno un çay o un Iskender per due, con un link."],["Affluenza & momento migliore","Quanto è pieno adesso, e quando stasera sarà più tranquillo."],["Il tuo solito","Iskender, misto, una porzione e mezza, ezme e ayran: di nuovo con un tocco."],["Ninja Nights","Vinile & fuoco, giovedì del rakı, uno chef ospite da Gaziantep."],["Ora in riproduzione","Quale brano suona, e la playlist del locale."],["Dopo la tua visita","Dillo direttamente allo chef; chi vuole, lascia anche una recensione su Google."]]}};
+      // Fallback when chapters.json cannot be fetched (opened from disk).
+      const CHAPTERS = [{"id":"intro","start":0,"title":{"nl":"Welkom bij Ninja","en":"Welcome to Ninja","tr":"Ninja’ya hoş geldin","ar":"مرحبًا بك في Ninja","fr":"Bienvenue chez Ninja","de":"Willkommen bei Ninja","it":"Benvenuti da Ninja"}},{"id":"vanavond","start":12.45,"title":{"nl":"Vanavond","en":"Tonight","tr":"Bu akşam","ar":"الليلة","fr":"Ce soir","de":"Heute Abend","it":"Stasera"}},{"id":"spies","start":21.5,"title":{"nl":"Live spies","en":"The spit, live","tr":"Canlı şiş","ar":"السيخ مباشرةً","fr":"La broche en direct","de":"Der Spieß, live","it":"Lo spiedo in diretta"}},{"id":"rij","start":31.75,"title":{"nl":"Digitale rij","en":"Digital line","tr":"Dijital sıra","ar":"الطابور الرقمي","fr":"File d’attente numérique","de":"Digitale Warteschlange","it":"Fila digitale"}},{"id":"menu","start":43.69,"title":{"nl":"Het menu","en":"The menu","tr":"Menü","ar":"قائمة الطعام","fr":"La carte","de":"Die Karte","it":"Il menù"}},{"id":"paspoort","start":54.61,"title":{"nl":"Bordpaspoort","en":"Plate passport","tr":"Tabak pasaportu","ar":"جواز الطبق","fr":"Passeport de l’assiette","de":"Tellerpass","it":"Passaporto del piatto"}},{"id":"flash","start":70.74,"title":{"nl":"Flash & story","en":"Flash & story","tr":"Flaş ve story","ar":"الفلاش والقصة","fr":"Flash & story","de":"Flash & Story","it":"Flash & storia"}},{"id":"match","start":82.66,"title":{"nl":"Ninja Match","en":"Ninja Match","tr":"Ninja Match","ar":"Ninja Match","fr":"Ninja Match","de":"Ninja Match","it":"Ninja Match"}},{"id":"eigen","start":97.14,"title":{"nl":"Eigen spies, Clan en drops","en":"Private spit, Clan and drops","tr":"Kendi şişin, Klan ve drop’lar","ar":"سيخك الخاص والعشيرة والإصدارات","fr":"Broche privée, Clan et drops","de":"Eigener Spieß, Clan und Drops","it":"Spiedo privato, Clan e drop"}},{"id":"betalen","start":106.92,"title":{"nl":"Betalen","en":"Paying","tr":"Ödeme","ar":"الدفع","fr":"Payer","de":"Bezahlen","it":"Pagare"}},{"id":"paneel","start":116.91,"title":{"nl":"Het paneel in 3D","en":"The panel in 3D","tr":"3D yönetim paneli","ar":"لوحة الإدارة ثلاثية الأبعاد","fr":"Le panneau en 3D","de":"Das Panel in 3D","it":"Il pannello in 3D"}},{"id":"tabs","start":132.14,"title":{"nl":"Vuur, pas en herkomst","en":"Fire, pass and provenance","tr":"Ateş, servis ve köken","ar":"النار ومنصة التقديم والمصدر","fr":"Feu, passe et provenance","de":"Feuer, Pass und Herkunft","it":"Fuoco, pass e provenienza"}},{"id":"website","start":143.22,"title":{"nl":"De website","en":"The website","tr":"Web sitesi","ar":"الموقع الإلكتروني","fr":"Le site web","de":"Die Website","it":"Il sito web"}},{"id":"slot","start":155.34,"title":{"nl":"Elke snede, live","en":"Every slice, live","tr":"Her dilim, canlı","ar":"كل شريحة، مباشرةً","fr":"Chaque tranche, en direct","de":"Jede Scheibe, live","it":"Ogni fetta, in diretta"}}];
+      const TAGS = { nl: 'nl-BE', fr: 'fr-BE' };
+      const LANG = T[window.LANG] ? window.LANG : 'nl';
+      const t = T[LANG];
+      const $ = (id) => document.getElementById(id);
+      document.title = t.doc;
+      $('kicker').textContent = t.kicker;
+      $('title').innerHTML = t.title;
+      $('lead').textContent = t.lead;
+      $('back').textContent = t.back;
+      $('chapters-title').textContent = t.chapters;
+      $('f-kicker').textContent = t.fKicker;
+      $('f-title').textContent = t.fTitle;
+      $('five-title').textContent = FEATURES[LANG].groups[0];
+      $('fifteen-title').textContent = FEATURES[LANG].groups[1];
+      $('h-kicker').textContent = t.hKicker;
+      $('honest').textContent = t.honest;
+      $('honest-more').textContent = t.honestMore;
+      $('footer').textContent = t.footer;
+      const withLang = (href) => (LANG === 'nl' ? href : href + '?lang=' + LANG);
+      $('back').href = withLang('../');
+      $('home').href = withLang('../');
+      const menu = $('lang');
+      menu.setAttribute('aria-label', t.select);
+      menu.value = LANG;
+      menu.addEventListener('change', () => {
+        const url = new URL(location.href);
+        url.searchParams.set('lang', menu.value);
+        location.replace(url.toString());
+      });
+
+      // The twenty features.
+      const card = (n, [title, line]) => {
+        const d = document.createElement('div');
+        d.className = 'feat leather';
+        d.innerHTML = '<span class="n"></span><h4></h4><p></p>';
+        d.querySelector('.n').textContent = String(n).padStart(2, '0');
+        d.querySelector('h4').textContent = title;
+        d.querySelector('p').textContent = line;
+        return d;
+      };
+      FEATURES[LANG].items.forEach((f, i) => $(i < 5 ? 'five' : 'fifteen').appendChild(card(i + 1, f)));
+
+      // The film: the subtitles of the page's language show; the others can be picked in the player.
+      const video = $('video');
+      for (const l of Object.keys(T)) {
+        const track = document.createElement('track');
+        track.kind = 'subtitles';
+        track.src = 'ninja-uitleg.' + l + '.vtt';
+        track.srclang = TAGS[l] || l;
+        track.label = menu.querySelector('option[value="' + l + '"]').textContent;
+        if (l === LANG) track.default = true;
+        video.appendChild(track);
+      }
+      // The browser may pick a track of its own (its interface language) while the film loads: until the film first
+      // plays, the page's language wins; after that, whatever the viewer picks in the player stays.
+      const showOwn = () => {
+        for (const tt of video.textTracks) tt.mode = tt.language === (TAGS[LANG] || LANG) ? 'showing' : 'disabled';
+      };
+      showOwn();
+      for (const ev of ['loadedmetadata', 'canplay', 'play']) video.addEventListener(ev, showOwn, { once: true });
+
+      // Chapters: click to jump, the one playing lights up.
+      const fmt = (s) => Math.floor(s / 60) + ':' + String(Math.floor(s % 60)).padStart(2, '0');
+      const draw = (list) => {
+        const ol = $('chapters');
+        ol.textContent = '';
+        const items = list.map((c, i) => {
+          const li = document.createElement('li');
+          const b = document.createElement('button');
+          b.type = 'button';
+          b.innerHTML = '<span class="no"></span><span class="t"></span><time></time>';
+          b.querySelector('.no').textContent = String(i + 1).padStart(2, '0');
+          b.querySelector('.t').textContent = (c.title && (c.title[LANG] || c.title.nl)) || c.id;
+          b.querySelector('time').textContent = fmt(c.start);
+          b.addEventListener('click', () => {
+            video.currentTime = c.start + 0.05;
+            video.play().catch(() => {});
+          });
+          li.appendChild(b);
+          ol.appendChild(li);
+          return { b, start: c.start };
+        });
+        let shown = -1;
+        const mark = () => {
+          let on = 0;
+          items.forEach((x, i) => {
+            if (video.currentTime + 0.1 >= x.start) on = i;
+          });
+          if (on === shown) return;
+          shown = on;
+          items.forEach((x, i) => x.b.classList.toggle('on', i === on));
+          const b = items[on].b;
+          const box = ol.getBoundingClientRect();
+          const r = b.getBoundingClientRect();
+          if (ol.scrollHeight > ol.clientHeight && (r.top < box.top || r.bottom > box.bottom)) ol.scrollTop += r.top - box.top - box.height / 3;
+        };
+        video.addEventListener('timeupdate', mark);
+        video.addEventListener('seeked', mark);
+        mark();
+      };
+      fetch('chapters.json')
+        .then((r) => (r.ok ? r.json() : Promise.reject()))
+        .then(draw)
+        .catch(() => draw(CHAPTERS));
+    </script>
+  </body>
+</html>

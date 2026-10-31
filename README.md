@@ -5,10 +5,14 @@ Vlaamsekaai 52 in Antwerp's Zuid: marinated beef with veal and lamb on a vertica
 lavash from a stone oven brought from Istanbul, fries in beef fat, a small menu and an Antwerp crowd that comes to be
 seen. This is a demo with test data only: a fictional team, fictional guests, and no real orders or payments.
 
+Live: https://yilmazeyup.github.io/ninja-antwerp-demo/
+
 - Start page: `/` (the app in a phone, the panel and the website, the twenty features to click through)
 - Guest app: `/app/`
-- Management panel: `/admin/` (`?at=2026-10-31T19:30` sets Ninja's clock)
+- Management panel: `/admin/` (`?at=2026-10-31T19:30` sets Ninja's clock to a busy Saturday evening)
 - Website: `/website/`
+- Explainer video: `/hulp/` (2:44, narrated in Flemish by the voice Ellen, fourteen chapters, subtitles in all seven
+  languages)
 
 The look and the rules behind everything are in [DESIGN.md](DESIGN.md).
 
@@ -84,7 +88,7 @@ apps/app/          the guest app (Expo SDK 58, Expo Router), exported for the we
 apps/web/          one Vite build with two pages: admin/ (the panel) and website/; public/ holds photos and the logo
 packages/shared/   Ninja's facts and menu, provenance, the demo evening, the spit's sensors, passports, Match, the
                    clan, drops and the rest, the clock, the look, the bridge between the screens; three/ for 3D
-site/              the start page
+site/              the start page; site/hulp the explainer video page
 scripts/           build and serve the site as GitHub Pages does; photos.ts and the i18n extraction
 ```
 
