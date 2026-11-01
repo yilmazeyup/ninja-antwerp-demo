@@ -11,8 +11,9 @@ Live: https://yilmazeyup.github.io/ninja-antwerp-demo/
 - Guest app: `/app/`
 - Management panel: `/admin/` (`?at=2026-10-31T19:30` sets Ninja's clock to a busy Saturday evening)
 - Website: `/website/`
-- Explainer video: `/hulp/` (2:44, narrated in Flemish by the voice Ellen, fourteen chapters, subtitles in every
-  language of the demo)
+- Explainer video: `/hulp/` (3:02, fourteen chapters, subtitles in every language of the demo), narrated in Flemish by
+  four voices from the ElevenLabs voice library (model `eleven_v4`): Hans opens, closes and reads every other chapter;
+  Petra, Diederik and Sharon take turns in between
 
 The look and the rules behind everything are in [DESIGN.md](DESIGN.md).
 
