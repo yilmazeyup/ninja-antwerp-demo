@@ -1,13 +1,14 @@
-// Serves _site/ the way GitHub Pages does: under the base path, folders with a trailing slash, and 404.html (the app)
-// for any address that is not a file. Usage: node scripts/serve-site.mjs [port], by default 8108
+// Serves _site/ the way GitHub Pages does: folders with a trailing slash, and 404.html (the app) for any address that is
+// not a file. Usage: node scripts/serve-site.mjs [port] [base path], by default 8108 and the root (as on
+// https://ninja.savastana.com/); pass the base path the site was built for, if any.
 import fs from 'node:fs';
 import http from 'node:http';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = fileURLToPath(new URL('../_site', import.meta.url));
-const base = '/ninja-antwerp-demo';
 const port = Number(process.argv[2] ?? 8108);
+const base = (process.argv[3] ?? '').replace(/\/$/, '');
 const TYPES = {
   '.html': 'text/html; charset=utf-8',
   '.js': 'text/javascript; charset=utf-8',
@@ -35,7 +36,7 @@ if (!fs.existsSync(path.join(root, '404.html'))) {
 http
   .createServer((req, res) => {
     const { pathname } = new URL(req.url ?? '/', 'http://localhost');
-    if (pathname === '/' || pathname === base) return redirect(res, `${base}/`);
+    if (base && (pathname === '/' || pathname === base)) return redirect(res, `${base}/`);
     let file = path.join(root, '404.html');
     let status = 404;
     if (pathname.startsWith(`${base}/`)) {

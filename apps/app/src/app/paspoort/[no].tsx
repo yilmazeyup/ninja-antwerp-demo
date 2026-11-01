@@ -88,7 +88,7 @@ export default function PassportScreen() {
 
   const day = dayOfPassport(p);
   const share = async () => {
-    const url = `https://yilmazeyup.github.io/ninja-antwerp-demo/website/#paspoort-${p.no}`;
+    const url = `https://ninja.savastana.com/website/#paspoort-${p.no}`;
     const text = tr('Mijn {dish} bij Ninja: gesneden om {time} op {c} °C. Paspoort No. {no}.')
       .replace('{dish}', p.dishName)
       .replace('{time}', clockSeconds(p.carved))

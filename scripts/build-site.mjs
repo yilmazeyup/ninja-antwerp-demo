@@ -1,17 +1,17 @@
-// Builds the demo site into _site/, the way GitHub Pages publishes it:
+// Builds the demo site into _site/, the way GitHub Pages publishes it at https://ninja.savastana.com/:
 //   /          the start page (site/index.html): the demo explained, with the app and the panel side by side
 //   /app/      the guest app, exported for the web
 //   /admin/    the management panel with Ninja in 3D        (apps/web, one Vite build with the website)
 //   /website/  the website concept
 //   /photos/, /brand/, /people/  Ninja's photos, the logo files and the Match portraits (apps/web/public)
 //   /404.html  the app again: GitHub Pages answers unknown addresses with it, so a link to a screen opens that screen
-// Usage: node scripts/build-site.mjs [base path], by default /ninja-antwerp-demo
+// Usage: node scripts/build-site.mjs [base path], by default the root
 import { execSync } from 'node:child_process';
 import fs from 'node:fs';
 import { fileURLToPath } from 'node:url';
 
 process.chdir(fileURLToPath(new URL('..', import.meta.url)));
-const base = (process.argv[2] ?? '/ninja-antwerp-demo').replace(/\/$/, '');
+const base = (process.argv[2] ?? '').replace(/\/$/, '');
 const run = (command, cwd, env = {}) => execSync(command, { cwd, stdio: 'inherit', env: { ...process.env, ...env } });
 
 fs.rmSync('_site', { recursive: true, force: true });

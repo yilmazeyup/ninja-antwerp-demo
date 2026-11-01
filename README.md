@@ -5,7 +5,7 @@ Vlaamsekaai 52 in Antwerp's Zuid: marinated beef with veal and lamb on a vertica
 lavash from a stone oven brought from Istanbul, fries in beef fat, a small menu and an Antwerp crowd that comes to be
 seen. This is a demo with test data only: a fictional team, fictional guests, and no real orders or payments.
 
-Live: https://yilmazeyup.github.io/ninja-antwerp-demo/
+Live: https://ninja.savastana.com/
 
 - Start page: `/` (the app in a phone, the panel and the website, the twenty features to click through)
 - Guest app: `/app/`
@@ -114,5 +114,5 @@ npm run studio
 
 They open on http://localhost:5192/admin/ and http://localhost:5192/website/. `npm run typecheck` checks everything.
 `npm run site` builds the whole demo into `_site/` and `npm run site:serve` serves it on
-http://localhost:8108/ninja-antwerp-demo/, where the app, the panel and the website share one origin and talk to each
+http://localhost:8108/, where the app, the panel and the website share one origin and talk to each
 other live.
